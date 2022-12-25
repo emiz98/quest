@@ -1,0 +1,27 @@
+{
+  "name": "socket-server",
+  "version": "1.0.0",
+  "description": "simple socket io server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "socket"
+  ],
+  "author": "emiz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "http": "0.0.1-security",
+    "socket.io": "^2.3.0",
+    "nodemon": "^2.0.19",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.0",
+    "colors": "^1.4.0"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}
