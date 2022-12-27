@@ -1,0 +1,22 @@
+version: "3.1"
+
+responses:
+  utter_general/greet:
+    - text: Hey there, my name is Quest.
+    - text: Hi, I'm Quest!
+    - text: Hi! My name's Quest.
+
+  utter_general/bye:
+    - text: Goodbye!
+    - text: Bye!
+    - text: Ciao!
+    - text: Bye, was nice talking to you!
+    - text: Bye bye!
+
+  utter_general/canthelp:
+    - text: I'm sorry I couldn't help you.
+
+  utter_general/thank:
+    - text: Glad to help you buddy.
+    - text: Anytime.
+    - text: Your welcome.

@@ -44,5 +44,6 @@ http://192.168.1.32:5005/webhooks/rest/webhook
 ### Documentations
 
 https://rasa.com/docs/rasa/chitchat-faqs/
+https://www.kaggle.com/datasets/rtatman/corpus-of-bilingual-childrens-speech
 
 ###### 💗 (4-FYP) Human Robotics Interaction
