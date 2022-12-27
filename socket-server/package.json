@@ -2,10 +2,10 @@
   "name": "socket_server",
   "version": "1.0.0",
   "description": "Socket server",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "nodemon": "nodemon app.js"
+    "start": "node index.js",
+    "nodemon": "nodemon index.js"
   },
   "keywords": [],
   "author": "emiz98",

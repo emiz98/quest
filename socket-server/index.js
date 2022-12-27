@@ -1,30 +1,18 @@
-const express = require("express");
-const app = express();
-const server = require("http").createServer();
-const io = require("socket.io")(server);
+require("dotenv").config();
+require("colors");
 
+const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-require("colors");
+
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const io = require("socket.io")(server);
 
 app.use(cors());
 app.use(bodyParser.json());
 app.options("*", cors());
-
-app.get("/", (req, res) => {
-  res.send("Welcome to server");
-});
-
-app.get("/send/:id/:message", (req, res) => {
-  console.log(req.params.id, req.params.message);
-  res.send({ id: req.params.id, msg: req.params.message });
-  //   const ioEmitter = req.app.get("socketIo");
-  //   ioEmitter
-  //     .to(req.params.id)
-  //     .emit("message", { id: "999", msg: req.params.message });
-  //   res.send("Sending message to " + req.params.id);
-  //   console.log("Sending message to " + req.params.id);
-});
 
 io.on("connection", function (client) {
   console.log("client connect...", client.id);
@@ -44,6 +32,14 @@ io.on("connection", function (client) {
     console.log("received error from client:", client.id);
     console.log(err);
   });
+});
+
+app.get("/", (req, res) => {
+  res.send("Welcome to quest socket server");
+});
+app.get("/send/:message", (req, res) => {
+  io.emit("message", { msg: req.params.message });
+  res.send("Sending message");
 });
 
 const PORT = process.env.PORT || 8080;
