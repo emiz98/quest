@@ -35,6 +35,7 @@ class _HomeState extends State<Home> {
       socket.on('connect', (_) => print('connect: ${socket.id}'));
       socket.on('message', (data) => handleMessage(data));
       socket.on('disconnect', (_) => print('disconnect'));
+      socket.on('error', (err) => print(err));
     } catch (e) {
       print(e.toString());
     }
@@ -64,9 +65,9 @@ class _HomeState extends State<Home> {
   Future<void> _onSpeechResult(response) async {
     var flutterTts = FlutterTts();
 
-    await flutterTts.setLanguage("en-AU");
-    await flutterTts.setSpeechRate(0.35);
-    await flutterTts.setPitch(1);
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setSpeechRate(0.38);
+    await flutterTts.setPitch(1.2);
 
     animateTrue();
     flutterTts.speak(response);
