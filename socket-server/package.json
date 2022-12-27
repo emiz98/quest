@@ -1,10 +1,10 @@
 {
-  "name": "server",
+  "name": "socket_server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Socket server",
+  "main": "app.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "nodemon": "nodemon app.js"
   },
   "keywords": [],
