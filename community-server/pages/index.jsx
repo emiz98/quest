@@ -48,7 +48,7 @@ const Home = () => {
           <NewActivityModel setNewActivityModel={setNewActivityModel} />
         )}
       </AnimatePresence>
-      <main className="p-5">
+      <main className="px-10 pt-5">
         <div className="mt-20 mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-medium">Community activities</h2>
           <button onClick={() => setNewActivityModel(true)} className="btn">

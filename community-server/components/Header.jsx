@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div
       className="flex items-center justify-between select-none
-    bg-red-500 p-5 fixed top-0 w-full z-50 shadow-md"
+    bg-red-500 px-10 py-2 fixed top-0 w-full z-50 shadow-md"
     >
       <h2
         onClick={() => router.push("/")}
