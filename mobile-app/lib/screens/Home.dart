@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
 
   void socketInit() {
     try {
-      socket = io('https://quest-teal.vercel.app', <String, dynamic>{
+      socket = io('http://172.21.160.1:8000', <String, dynamic>{
         'transports': ['websocket'],
         'autoConnect': false,
       });
