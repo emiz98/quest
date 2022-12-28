@@ -17,11 +17,19 @@ const NewActivityModel = ({ setNewActivityModel }) => {
   const addImage = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
-    const reader = new window.FileReader();
-    reader.readAsArrayBuffer(file);
+    // const reader = new window.FileReader();
+    // reader.readAsArrayBuffer(file);
 
-    reader.onloadend = () => {
-      setInput({ ...input, image: Buffer(reader.result) });
+    // reader.onloadend = () => {
+    //   setInput({ ...input, image: Buffer(reader.result) });
+    // };
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      setInput({ ...input, image: fileReader.result });
+    };
+    fileReader.onerror = (error) => {
+      reject(error);
     };
   };
 
@@ -31,7 +39,8 @@ const NewActivityModel = ({ setNewActivityModel }) => {
     } else {
       setIsUploading(true);
       const config = {
-        headers: { "content-type": "multipart/form-data" },
+        headers: { "content-type": "application/json" },
+        // headers: { "content-type": "multipart/form-data" },
         onUploadProgress: (event) => {
           console.log(
             `Current progress:`,
@@ -40,13 +49,14 @@ const NewActivityModel = ({ setNewActivityModel }) => {
         },
       };
       const response = await axios.post(
-        "/api/activity/add",
+        "/api/activity/new",
         {
           title: input.title,
           image: input.image,
         },
         config
       );
+      console.log(response.data);
       if (response.status == 200) {
         setIsUploading(false);
         setNewActivityModel(false);
@@ -124,9 +134,10 @@ const NewActivityModel = ({ setNewActivityModel }) => {
           />
           <div
             style={{
-              backgroundImage: `url(data:image/png;base64,${Buffer.from(
-                input.image
-              ).toString("base64")})`,
+              backgroundImage: `url(${input.image})`,
+              // backgroundImage: `url(data:image/png;base64,${Buffer.from(
+              //   input.image
+              // ).toString("base64")})`,
             }}
             onClick={() => imageFileRef.current.click()}
             className={`mt-2 group flex cursor-pointer flex-col items-center space-y-2 overflow-hidden

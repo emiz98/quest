@@ -4,7 +4,7 @@ const { Schema, model, models } = mongoose;
 const ActivitySchema = new Schema(
   {
     title: String,
-    image: String,
+    image: Buffer,
   },
   { versionKey: false, timestamps: true }
 );

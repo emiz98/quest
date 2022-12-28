@@ -5,7 +5,7 @@ const CardSchema = new Schema(
   {
     actID: String,
     title: String,
-    image: String,
+    image: Buffer,
   },
   { versionKey: false, timestamps: true }
 );
