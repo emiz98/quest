@@ -1,7 +1,10 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewActivityModel = ({ setNewActivityModel }) => {
   const imageFileRef = useRef(null);
@@ -19,6 +22,34 @@ const NewActivityModel = ({ setNewActivityModel }) => {
     reader.onloadend = () => {
       setInput({ ...input, image: Buffer(reader.result) });
     };
+  };
+
+  const handleSubmit = async () => {
+    if (input.title == "" || input.image == "") {
+      toast.error("Please provide necessary details");
+    } else {
+      const res = await fetch("/api/activity/add", {
+        body: {
+          title: input.title,
+          image: input.image,
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        method: "POST",
+      });
+      // const res = axios
+      //   .post("/api/activity/add", {
+      //     title: input.title,
+      //     image: input.image,
+      //   })
+      //   .then((response) => {
+      //     console.log(response.status);
+      //   });
+      // if (res.status == 200) {
+      //   setNewActivityModel(false);
+      // }
+    }
   };
 
   return (
@@ -96,7 +127,20 @@ const NewActivityModel = ({ setNewActivityModel }) => {
             <PlusIcon className="w-16 h-16 transition ease-out" />
             <p className="text-xs transition ease-out">Upload Image</p>
           </div>
-          <button className="btn w-full mt-3">Upload Activity</button>
+          <button onClick={handleSubmit} className="btn w-full mt-3">
+            Upload Activity
+          </button>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={true}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            pauseOnHover
+            theme="light"
+          />
         </div>
       </motion.div>
     </motion.div>

@@ -60,8 +60,8 @@ const Home = () => {
           className="grid grid-cols-1 sm:grid-cols-2  scrollbar-hide
         md:grid-cols-3 lg:grid-cols-4 gap-5 overflow-y-scroll h-[81vh]"
         >
-          {data.map(({ name, img }) => (
-            <ActivityCard title={name} img={img} />
+          {data.map(({ name, img }, i) => (
+            <ActivityCard key={i} title={name} img={img} />
           ))}
         </div>
 
