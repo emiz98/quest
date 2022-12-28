@@ -33,8 +33,15 @@ const data = [
   },
 ];
 
-const Home = () => {
+const Home = ({ activities }) => {
+  const [activitiesTemp, setActivitiesTemp] = useState(activities);
   const [newActivityModel, setNewActivityModel] = useState(false);
+
+  const refetch = async () => {
+    const res = await fetch("/api/activity/all").then((res) => res.json());
+    setActivitiesTemp(res);
+  };
+
   return (
     <div className="bg-white h-screen overflow-hidden">
       <Head>
@@ -45,7 +52,10 @@ const Home = () => {
       <Header />
       <AnimatePresence>
         {newActivityModel && (
-          <NewActivityModel setNewActivityModel={setNewActivityModel} />
+          <NewActivityModel
+            setNewActivityModel={setNewActivityModel}
+            refetch={refetch}
+          />
         )}
       </AnimatePresence>
       <main className="px-10 pt-5">
@@ -60,8 +70,8 @@ const Home = () => {
           className="grid grid-cols-1 sm:grid-cols-2  scrollbar-hide
         md:grid-cols-3 lg:grid-cols-4 gap-5 overflow-y-scroll h-[81vh]"
         >
-          {data.map(({ name, img }, i) => (
-            <ActivityCard key={i} title={name} img={img} />
+          {activitiesTemp.data.map(({ _id, title, image }) => (
+            <ActivityCard key={_id} title={title} img={image} />
           ))}
         </div>
 
@@ -72,3 +82,15 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  const activities = await fetch(
+    "https://quest-alpha.vercel.app/api/activity/all"
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      activities,
+    },
+  };
+}

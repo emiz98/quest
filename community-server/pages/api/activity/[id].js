@@ -1,5 +1,7 @@
 import Activity from "../../../models/Activity";
 import fs from "fs";
+import db from "../../../db";
+db();
 
 export default async function handler(req, res) {
   const {

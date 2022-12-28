@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const NewActivityModel = ({ setNewActivityModel }) => {
+const NewActivityModel = ({ setNewActivityModel, refetch }) => {
   const imageFileRef = useRef(null);
   const [isUploading, setIsUploading] = useState(false);
   const [input, setInput] = useState({
@@ -17,18 +17,17 @@ const NewActivityModel = ({ setNewActivityModel }) => {
   const addImage = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
-    // const reader = new window.FileReader();
-    // reader.readAsArrayBuffer(file);
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(file);
 
-    // reader.onloadend = () => {
-    //   setInput({ ...input, image: Buffer(reader.result) });
-    // };
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      setInput({ ...input, image: fileReader.result });
+    reader.onloadend = () => {
+      setInput({ ...input, image: Buffer(reader.result) });
     };
-    fileReader.onerror = (error) => {
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   setInput({ ...input, image: reader.result });
+    // };
+    reader.onerror = (error) => {
       reject(error);
     };
   };
@@ -56,8 +55,9 @@ const NewActivityModel = ({ setNewActivityModel }) => {
         },
         config
       );
-      console.log(response.data);
+
       if (response.status == 200) {
+        refetch();
         setIsUploading(false);
         setNewActivityModel(false);
       } else {
@@ -134,10 +134,9 @@ const NewActivityModel = ({ setNewActivityModel }) => {
           />
           <div
             style={{
-              backgroundImage: `url(${input.image})`,
-              // backgroundImage: `url(data:image/png;base64,${Buffer.from(
-              //   input.image
-              // ).toString("base64")})`,
+              backgroundImage: `url(data:image/png;base64,${Buffer.from(
+                input.image
+              ).toString("base64")})`,
             }}
             onClick={() => imageFileRef.current.click()}
             className={`mt-2 group flex cursor-pointer flex-col items-center space-y-2 overflow-hidden

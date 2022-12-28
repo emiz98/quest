@@ -1,5 +1,5 @@
-import db from "../../../db";
 import Activity from "../../../models/Activity";
+import db from "../../../db";
 db();
 
 export default async function handler(req, res) {
