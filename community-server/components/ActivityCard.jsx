@@ -60,9 +60,9 @@ const ActivityCard = ({ id, title, img, refetch }) => {
             className="btn px-3 h-10 w-10"
             onClick={() => setDeleteModel(true)}
           />
-          <span className="text-white bg-black p-3 rounded-lg font-medium text-sm">
+          {/* <span className="text-white bg-black p-3 rounded-lg font-medium text-sm">
             x5 Cards
-          </span>
+          </span> */}
         </div>
       </div>
 
