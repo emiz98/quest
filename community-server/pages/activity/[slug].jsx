@@ -5,56 +5,37 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import NewCardModel from "../../components/NewCardModel";
 
-const data = [
-  {
-    name: "Pineapple",
-    img: "https://png.pngtree.com/png-vector/20201111/ourlarge/pngtree-vector-simple-cute-pineapple-clipart-png-image_2413289.jpg",
-  },
-  {
-    name: "Apple",
-    img: "https://illustoon.com/photo/766.png",
-  },
-  {
-    name: "Grapes",
-    img: "https://www.pngkey.com/png/detail/22-221852_large-painted-grapes-png-clipart-grapes-clipart.png",
-  },
-  {
-    name: "Orange",
-    img: "https://illustoon.com/photo/801.png",
-  },
-  {
-    name: "Pineapple",
-    img: "https://png.pngtree.com/png-vector/20201111/ourlarge/pngtree-vector-simple-cute-pineapple-clipart-png-image_2413289.jpg",
-  },
-  {
-    name: "Apple",
-    img: "https://illustoon.com/photo/766.png",
-  },
-  {
-    name: "Grapes",
-    img: "https://www.pngkey.com/png/detail/22-221852_large-painted-grapes-png-clipart-grapes-clipart.png",
-  },
-  {
-    name: "Orange",
-    img: "https://illustoon.com/photo/801.png",
-  },
-];
-const Activity = ({ project }) => {
+const Activity = ({ activity, cards }) => {
   const [newCardModel, setNewCardModel] = useState(false);
+  const [cardsTemp, setCardsTemp] = useState(cards);
+
+  const refetch = async () => {
+    const res = await fetch(`/api/card/all?actID=${activity.data._id}`).then(
+      (res) => res.json()
+    );
+    setCardsTemp(res);
+  };
+
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="">
       <Head>
-        <title>Quest - {project}</title>
+        <title>Quest - {activity.data.title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
       <AnimatePresence>
-        {newCardModel && <NewCardModel setNewCardModel={setNewCardModel} />}
+        {newCardModel && (
+          <NewCardModel
+            setNewCardModel={setNewCardModel}
+            actID={activity.data._id}
+            refetch={refetch}
+          />
+        )}
       </AnimatePresence>
-      <main className="p-5">
-        <div className="mt-20 flex items-center justify-between mb-10">
-          <h2 className="text-2xl font-medium">{project}</h2>
+      <main className="p-5 px-5 md:px-10 lg:px-20 xl:px-40">
+        <div className="mt-20 flex flex-col md:flex-row md:items-center justify-between mb-10 gap-y-3">
+          <h2 className="text-2xl font-medium">{activity.data.title}</h2>
           <button onClick={() => setNewCardModel(true)} className="btn">
             Add Flash Card
           </button>
@@ -62,10 +43,17 @@ const Activity = ({ project }) => {
 
         <div
           className="grid grid-cols-1 lg:grid-cols-2 scrollbar-hide
-        xl:grid-cols-3 gap-5 h-[80vh] overflow-y-scroll"
+        xl:grid-cols-3 gap-5"
         >
-          {data.map(({ name, img }, i) => (
-            <FlashCard title={name} img={img} key={i} index={i + 1} />
+          {cardsTemp.data.map(({ _id, title, image }, i) => (
+            <FlashCard
+              title={title}
+              img={image}
+              key={_id}
+              index={i + 1}
+              id={_id}
+              refetch={refetch}
+            />
           ))}
         </div>
       </main>
@@ -76,11 +64,17 @@ const Activity = ({ project }) => {
 export default Activity;
 
 export const getServerSideProps = async (context) => {
-  const project = context.query.slug;
+  const activity = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/activity/${context.query.slug}`
+  ).then((res) => res.json());
+  const cards = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/card/all?actID=${context.query.slug}`
+  ).then((res) => res.json());
 
   return {
     props: {
-      project,
+      activity,
+      cards,
     },
   };
 };

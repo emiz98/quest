@@ -58,8 +58,8 @@ const Home = ({ activities }) => {
           />
         )}
       </AnimatePresence>
-      <main className="px-10 pt-5">
-        <div className="mt-20 mb-8 flex items-center justify-between">
+      <main className="px-5 md:px-10 lg:px-20 xl:px-40 pt-5">
+        <div className="mt-20 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-y-3">
           <h2 className="text-2xl font-medium">Community activities</h2>
           <button onClick={() => setNewActivityModel(true)} className="btn">
             Add activity
@@ -68,10 +68,16 @@ const Home = ({ activities }) => {
 
         <div
           className="grid grid-cols-1 sm:grid-cols-2  scrollbar-hide
-        md:grid-cols-3 lg:grid-cols-4 gap-5 overflow-y-scroll h-[81vh]"
+           lg:grid-cols-3 2xl:grid-cols-4 gap-5 overflow-y-scroll h-[70vh] md:h-[81vh]"
         >
           {activitiesTemp.data.map(({ _id, title, image }) => (
-            <ActivityCard key={_id} title={title} img={image} />
+            <ActivityCard
+              key={_id}
+              id={_id}
+              title={title}
+              img={image}
+              refetch={refetch}
+            />
           ))}
         </div>
 
@@ -85,7 +91,7 @@ export default Home;
 
 export async function getServerSideProps() {
   const activities = await fetch(
-    "https://quest-alpha.vercel.app/api/activity/all"
+    `${process.env.NEXTAUTH_URL}/api/activity/all`
   ).then((res) => res.json());
 
   return {

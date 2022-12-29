@@ -1,5 +1,5 @@
 import Activity from "../../../models/Activity";
-import fs from "fs";
+// import fs from "fs";
 import db from "../../../db";
 db();
 
@@ -41,14 +41,15 @@ export default async function handler(req, res) {
           res.status(400).json({ success: false });
         }
         const deleteActivity = await Activity.deleteOne({ _id: id });
-        const filePath = "./public/uploads/activity/" + activity.image;
-        fs.unlink(filePath, (error) => {
-          if (error) {
-            res.status(200).json({ success: true, error: error });
-          } else {
-            res.status(200).json({ success: true, data: deleteActivity });
-          }
-        });
+        // const filePath = "./public/uploads/activity/" + activity.image;
+        // fs.unlink(filePath, (error) => {
+        //   if (error) {
+        //     res.status(200).json({ success: true, error: error });
+        //   } else {
+        //     res.status(200).json({ success: true, data: deleteActivity });
+        //   }
+        // });
+        res.status(200).json({ success: true, data: deleteActivity });
       } catch (error) {
         res.status(400).json({ success: false, error: error });
       }

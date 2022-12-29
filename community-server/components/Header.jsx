@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div
       className="flex items-center justify-between select-none
-    bg-red-500 px-10 py-2 fixed top-0 w-full z-50 shadow-md"
+    bg-red-500 px-5 md:px-10 lg:px-20 xl:px-40 py-2 fixed top-0 w-full z-50 shadow-md"
     >
       <h2
         onClick={() => router.push("/")}
@@ -21,7 +21,7 @@ const Header = () => {
           src="https://avatars.githubusercontent.com/u/64089619?v=4"
           alt="profile"
         />
-        <div className="flex flex-col">
+        <div className="hidden md:flex flex-col">
           <span className="font-medium text-white">Menura Adithya</span>
           <span className="font-light text-sm hover:underline cursor-pointer text-white">
             Logout

@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@badrap/bar-of-progress": "^0.2.2",
     "@heroicons/react": "^2.0.13",
     "axios": "^1.2.1",
     "framer-motion": "^8.0.2",

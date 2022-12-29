@@ -5,21 +5,23 @@ import {
   XMarkIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const ActivityCard = ({ title, img }) => {
+const ActivityCard = ({ id, title, img, refetch }) => {
   const router = useRouter();
-  const slug = "test";
   const [deleteModel, setDeleteModel] = useState(false);
 
-  const handleDelete = () => {};
+  const handleDelete = async () => {
+    return await axios.delete("/api/activity/" + id).then(() => refetch());
+  };
 
   return (
     <div className="group cursor-pointer">
       <div className="rounded-xl h-60 object-cover w-full relative overflow-hidden">
         <EyeIcon
-          onClick={() => router.push({ pathname: `/activity/${slug}` })}
+          onClick={() => router.push({ pathname: `/activity/${id}` })}
           className="absolute left-0 right-0 z-20 h-12 w-12 top-0 bottom-0 p-2 hover:bg-red-600
          text-white hidden group-hover:inline-block m-auto bg-red-500 rounded-full"
         />
@@ -66,7 +68,7 @@ const ActivityCard = ({ title, img }) => {
 
       <div className="mt-5">
         <h3
-          onClick={() => router.push({ pathname: `/activity/${slug}` })}
+          onClick={() => router.push({ pathname: `/activity/${id}` })}
           className="text-lg font-medium hover:underline"
         >
           {title}

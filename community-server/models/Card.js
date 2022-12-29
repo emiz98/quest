@@ -3,9 +3,9 @@ const { Schema, model, models } = mongoose;
 
 const CardSchema = new Schema(
   {
-    actID: String,
     title: String,
     image: Buffer,
+    actID: { type: Schema.Types.ObjectId, ref: "Activity" },
   },
   { versionKey: false, timestamps: true }
 );
