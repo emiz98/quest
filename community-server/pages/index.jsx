@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { QRCodeSVG } from "qrcode.react";
 import ActivityCard from "../components/ActivityCard";
 import NewActivityModel from "../components/NewActivityModel";
 import Header from "../components/Header";
@@ -46,7 +45,7 @@ const Home = ({ activities }) => {
     <div className="bg-white h-screen overflow-hidden">
       <Head>
         <title>Quest - Community Server</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
 
       <Header />
@@ -80,8 +79,6 @@ const Home = ({ activities }) => {
             />
           ))}
         </div>
-
-        {/* <QRCodeSVG value="https://reactjs.org/" /> */}
       </main>
     </div>
   );

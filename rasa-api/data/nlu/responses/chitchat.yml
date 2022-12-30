@@ -5,6 +5,26 @@ responses:
     - text: "One of the smartest person named adithya"
     - text: "My creator is adithya"
 
+  utter_chitchat/greet:
+    - text: Hey there, my name is Quest.
+    - text: Hi, I'm Quest!
+    - text: Hi! My name's Quest.
+
+  utter_chitchat/bye:
+    - text: Goodbye!
+    - text: Bye!
+    - text: Ciao!
+    - text: Bye, was nice talking to you!
+    - text: Bye bye!
+
+  utter_chitchat/canthelp:
+    - text: I'm sorry I couldn't help you.
+
+  utter_chitchat/thank:
+    - text: Glad to help you buddy.
+    - text: Anytime.
+    - text: Your welcome.
+
   utter_chitchat/ask_howdoing:
     - text: "I'm great! Thanks for asking."
     - text: "I'm good, thanks!"
@@ -58,7 +78,7 @@ responses:
   utter_chitchat/ask_wherefrom:
     - text: "I was born in a lab."
     - text: "I was born in the coolest country on Earth, in Sri Lanka."
-    - text: "My developer is adithya. You should ask him."
+    - text: "My developer is aadithya. You should ask him."
 
   utter_chitchat/ask_whoami:
     - text: "You are my best friend."

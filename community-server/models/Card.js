@@ -5,6 +5,7 @@ const CardSchema = new Schema(
   {
     title: String,
     image: Buffer,
+    hints: [{ type: String }],
     actID: { type: Schema.Types.ObjectId, ref: "Activity" },
   },
   { versionKey: false, timestamps: true }

@@ -9,7 +9,10 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 class SpeakBtn extends StatefulWidget {
   final animateTrueFunc;
-  const SpeakBtn({Key? key, required this.animateTrueFunc}) : super(key: key);
+  final animateFalseFunc;
+  const SpeakBtn(
+      {Key? key, required this.animateTrueFunc, required this.animateFalseFunc})
+      : super(key: key);
 
   @override
   State<SpeakBtn> createState() => _SpeakBtnState();
@@ -30,10 +33,9 @@ class _SpeakBtnState extends State<SpeakBtn> {
   }
 
   talk(String message) async {
-    // var res = await apiService.talk("sender_test", message);
-    // return res[0]['text'];
-
-    return "Hello! how are you?";
+    var res = await apiService.talk("sender_test", message);
+    return res[0]['text'];
+    // return "Hello! how are you?";
   }
 
   Future<void> _onSpeechResult(SpeechRecognitionResult result) async {
@@ -41,7 +43,7 @@ class _SpeakBtnState extends State<SpeakBtn> {
 
     await flutterTts.setLanguage("en-US");
     await flutterTts.setSpeechRate(0.4);
-    await flutterTts.setPitch(1.3);
+    await flutterTts.setPitch(1.2);
 
     String _lastWords = (result.recognizedWords.toString().toLowerCase());
 
@@ -50,6 +52,9 @@ class _SpeakBtnState extends State<SpeakBtn> {
       widget.animateTrueFunc();
       flutterTts.speak(botResponse);
       _speech.stop();
+      flutterTts.setCompletionHandler(() {
+        widget.animateFalseFunc();
+      });
     }
 
     // if (_lastWords.contains("quest")) {

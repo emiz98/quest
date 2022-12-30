@@ -12,6 +12,9 @@ const NewCardModel = ({ setNewCardModel, refetch, actID }) => {
   const [input, setInput] = useState({
     title: "",
     image: "",
+    hint1: "",
+    hint2: "",
+    hint3: "",
   });
 
   const addImage = (event) => {
@@ -53,6 +56,7 @@ const NewCardModel = ({ setNewCardModel, refetch, actID }) => {
           title: input.title,
           image: input.image,
           actID: actID,
+          hint: [input.hint1, input.hint2, input.hint3],
         },
         config
       );
@@ -104,7 +108,7 @@ const NewCardModel = ({ setNewCardModel, refetch, actID }) => {
         className="relative w-2/5 lg:w-1/5 shadow-lg overflow-hidden rounded-md bg-white p-6 text-black"
       >
         <div className="flex items-center justify-between">
-          <span className="text-lg font-medium">Add new activity</span>
+          <span className="text-lg font-medium">Add new card</span>
           <XMarkIcon
             onClick={() =>
               !isUploading
@@ -123,7 +127,7 @@ const NewCardModel = ({ setNewCardModel, refetch, actID }) => {
             className="rounded-lg bg-gray-200 px-4 py-2 focus:border-black
             outline-none w-full placeholder:text-gray-500 border-2"
             type="text"
-            placeholder="Enter activity title"
+            placeholder="Enter card title"
           />
           <input
             ref={imageFileRef}
@@ -149,6 +153,32 @@ const NewCardModel = ({ setNewCardModel, refetch, actID }) => {
           >
             <PlusIcon className="w-16 h-16 transition ease-out" />
             <p className="text-xs transition ease-out">Upload Image</p>
+          </div>
+          <div className="my-3 space-y-2">
+            <input
+              value={input.hint1}
+              onChange={(e) => setInput({ ...input, hint1: e.target.value })}
+              className="rounded-lg bg-gray-200 px-4 py-2 focus:border-black
+            outline-none w-full placeholder:text-gray-500 border-2"
+              type="text"
+              placeholder="Enter hint 1"
+            />
+            <input
+              value={input.hint2}
+              onChange={(e) => setInput({ ...input, hint2: e.target.value })}
+              className="rounded-lg bg-gray-200 px-4 py-2 focus:border-black
+            outline-none w-full placeholder:text-gray-500 border-2"
+              type="text"
+              placeholder="Enter hint 2"
+            />
+            <input
+              value={input.hint3}
+              onChange={(e) => setInput({ ...input, hint3: e.target.value })}
+              className="rounded-lg bg-gray-200 px-4 py-2 focus:border-black
+            outline-none w-full placeholder:text-gray-500 border-2"
+              type="text"
+              placeholder="Enter hint 3"
+            />
           </div>
           <button
             disabled={isUploading}

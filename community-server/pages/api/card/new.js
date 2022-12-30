@@ -7,6 +7,7 @@ export default async function handler(req, res) {
     title: req.body.title,
     image: req.body.image,
     actID: req.body.actID,
+    hints: req.body.hint,
   };
   const card = await Card.create(obj);
   res.status(200).json({ success: true, data: card });

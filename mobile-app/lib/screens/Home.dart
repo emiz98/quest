@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
 
   void socketInit() {
     try {
-      socket = io('http://172.21.160.1:8000', <String, dynamic>{
+      socket = io('http://192.168.1.32:8000', <String, dynamic>{
         'transports': ['websocket'],
         'autoConnect': false,
       });
@@ -59,7 +59,11 @@ class _HomeState extends State<Home> {
   }
 
   animateTrue() {
-    setState(() => _isAnimate = !_isAnimate);
+    setState(() => _isAnimate = true);
+  }
+
+  animateFalse() {
+    setState(() => _isAnimate = false);
   }
 
   Future<void> _onSpeechResult(response) async {
@@ -67,11 +71,13 @@ class _HomeState extends State<Home> {
 
     await flutterTts.setLanguage("en-US");
     await flutterTts.setSpeechRate(0.38);
-    await flutterTts.setPitch(1.2);
+    await flutterTts.setPitch(1);
 
     animateTrue();
     flutterTts.speak(response);
-    Future.delayed(const Duration(milliseconds: 1500), () => animateTrue());
+    flutterTts.setCompletionHandler(() {
+      animateFalse();
+    });
   }
 
   @override
@@ -102,17 +108,15 @@ class _HomeState extends State<Home> {
                 child: _isAnimate
                     ? Lottie.asset(
                         'assets/lotties/happy.json',
-                        animate: _isAnimate,
                       )
                     : Lottie.asset(
-                        'assets/lotties/love.json',
-                        animate: _isAnimate,
+                        'assets/lotties/cry.json',
                       )),
             Align(
                 alignment: Alignment.bottomRight,
                 child: SpeakBtn(
-                  animateTrueFunc: animateTrue,
-                )),
+                    animateTrueFunc: animateTrue,
+                    animateFalseFunc: animateTrue)),
           ],
         ),
       ),
