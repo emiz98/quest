@@ -2,6 +2,9 @@ import speech_recognition as sr
 import text_to_speech as t2p
 import requests
 
+url = 'http://192.168.1.32:5005/webhooks/rest/webhook'
+socketUrl = 'http://192.168.1.32:8000/send/'
+
 
 def speechToText():
     r = sr.Recognizer()
@@ -28,10 +31,10 @@ def speechToText():
     return query
 
 
-# while True:
-#     # t2p.text2speech(speechToText())
-#     requests.get(socketUrl+speechToText())
-#     input("Press Enter to continue...")
+while True:
+    # t2p.text2speech(speechToText())
+    requests.get(socketUrl+speechToText())
+    input("Press Enter to continue...")
 
 
 # r = requests.get("http://localhost:3000/api/activity/all")

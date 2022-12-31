@@ -3,16 +3,19 @@ import {
   TrashIcon,
   XMarkIcon,
   ArrowDownTrayIcon,
+  PencilIcon,
 } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import DownloadableCard from "./DownloadableCard";
 import html2canvas from "html2canvas";
+import EditCardModel from "./EditCardModel";
 
-const FlashCard = ({ title, img, index, id, refetch }) => {
+const FlashCard = ({ title, img, id, hints, refetch }) => {
   const myComponentRef = useRef(null);
   const [deleteModel, setDeleteModel] = useState(false);
+  const [editModel, setEditModel] = useState(false);
 
   const handleDelete = async () => {
     return await axios.delete("/api/card/" + id).then(() => refetch());
@@ -42,6 +45,18 @@ const FlashCard = ({ title, img, index, id, refetch }) => {
       className="flex items-center justify-between h-28 select-none
     bg-gray-100 rounded-lg p-2 border-2 border-red-400"
     >
+      <AnimatePresence>
+        {editModel && (
+          <EditCardModel
+            id={id}
+            title={title}
+            img={img}
+            hints={hints}
+            setEditCardModel={setEditModel}
+            refetch={refetch}
+          />
+        )}
+      </AnimatePresence>
       <div className="flex items-center gap-x-5">
         <img
           style={{
@@ -82,12 +97,12 @@ const FlashCard = ({ title, img, index, id, refetch }) => {
                 <CheckIcon
                   onClick={handleDelete}
                   className="h-10 w-10 p-2 bg-green-500 hover:bg-green-600 
-              transition-all ease-in-out rounded-lg text-white"
+              transition-all ease-in-out rounded-lg text-white cursor-pointer"
                 />
                 <XMarkIcon
                   onClick={() => setDeleteModel(false)}
                   className="h-10 w-10 p-2 bg-blue-500 hover:bg-blue-600 
-              transition-all ease-in-out rounded-lg text-white"
+              transition-all ease-in-out rounded-lg text-white cursor-pointer"
                 />
               </div>
             </motion.div>
@@ -96,10 +111,15 @@ const FlashCard = ({ title, img, index, id, refetch }) => {
               <ArrowDownTrayIcon
                 onClick={() => downloadImage(myComponentRef.current)}
                 className="h-10 w-10 p-2 bg-green-500 hover:bg-green-600 
-              transition-all ease-in-out rounded-lg text-white"
+              transition-all ease-in-out rounded-lg text-white cursor-pointer"
+              />
+              <PencilIcon
+                onClick={() => setEditModel(true)}
+                className="h-10 w-10 p-2 bg-blue-500 hover:bg-blue-600 
+              transition-all ease-in-out rounded-lg text-white cursor-pointer"
               />
               <TrashIcon
-                className="h-10 w-10 btn p-2"
+                className="h-10 w-10 btn p-2 cursor-pointer"
                 onClick={() => setDeleteModel(true)}
               />
             </>

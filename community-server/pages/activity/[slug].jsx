@@ -7,11 +7,12 @@ import NewCardModel from "../../components/NewCardModel";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import DownloadableCard from "../../components/DownloadableCard";
 import html2canvas from "html2canvas";
+import { useEffect } from "react";
 
 const Activity = ({ activity, cards }) => {
-  const [newCardModel, setNewCardModel] = useState(false);
   const [cardsTemp, setCardsTemp] = useState(cards);
-  const cardsRefs = cardsTemp.data.map(() => useRef(null));
+  let cardsRefs = cards.data.map(() => useRef(null));
+  const [newCardModel, setNewCardModel] = useState(false);
 
   const refetch = async () => {
     const res = await fetch(`/api/card/all?actID=${activity.data._id}`).then(
@@ -65,11 +66,11 @@ const Activity = ({ activity, cards }) => {
             <button onClick={() => setNewCardModel(true)} className="btn">
               Add Flash Card
             </button>
-            <ArrowDownTrayIcon
+            {/* <ArrowDownTrayIcon
               onClick={() => downloadImage(cardsRefs, "title")}
               className="h-10 w-10 p-2 bg-green-500 hover:bg-green-600 
               transition-all ease-in-out rounded-lg text-white"
-            />
+            /> */}
           </div>
         </div>
 
@@ -85,13 +86,13 @@ const Activity = ({ activity, cards }) => {
               </h5>
             </div>
           )}
-          {cardsTemp.data.map(({ _id, title, image }, i) => (
+          {cardsTemp.data.map(({ _id, title, image, hints }, i) => (
             <FlashCard
               title={title}
               img={image}
               key={_id}
-              index={i + 1}
               id={_id}
+              hints={hints}
               refetch={refetch}
             />
           ))}

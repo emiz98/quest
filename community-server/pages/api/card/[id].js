@@ -9,6 +9,20 @@ export default async function handler(req, res) {
     method,
   } = req;
   switch (method) {
+    case "PUT":
+      try {
+        const card = await Card.findByIdAndUpdate(id, req.body, {
+          new: true,
+          runValidators: true,
+        });
+        // if (!activity) {
+        //   res.status(400).json({ success: false, error: "card not found" });
+        // }
+        res.status(200).json({ success: true, data: card });
+      } catch (error) {
+        res.status(400).json({ success: false, error: error });
+      }
+      break;
     case "DELETE":
       try {
         const card = await Card.findById(id);

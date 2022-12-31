@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
                         'assets/lotties/happy.json',
                       )
                     : Lottie.asset(
-                        'assets/lotties/cry.json',
+                        'assets/lotties/idle1.json',
                       )),
             Align(
                 alignment: Alignment.bottomRight,
