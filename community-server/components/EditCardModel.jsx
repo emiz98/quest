@@ -79,7 +79,7 @@ const EditCardModel = ({
         exit={{
           scale: 0,
         }}
-        className="relative w-2/5 lg:w-1/5 shadow-lg overflow-hidden rounded-md bg-white p-6 text-black"
+        className="relative w-4/5 sm:w-2/5 lg:w-1/5 shadow-lg overflow-hidden rounded-md bg-white p-6 text-black"
       >
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium">Update Flash Card</span>
@@ -164,10 +164,10 @@ const EditCardModel = ({
                     fill="currentFill"
                   />
                 </svg>
-                <span>Uploading</span>
+                <span>Updating</span>
               </div>
             ) : (
-              <span>Update Activity</span>
+              <span>Update Card</span>
             )}
           </button>
           <ToastContainer

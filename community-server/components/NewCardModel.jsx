@@ -105,7 +105,7 @@ const NewCardModel = ({ setNewCardModel, refetch, actID }) => {
         exit={{
           scale: 0,
         }}
-        className="relative w-2/5 lg:w-1/5 shadow-lg overflow-hidden rounded-md bg-white p-6 text-black"
+        className="relative w-4/5 sm:w-2/5 lg:w-1/5 shadow-lg overflow-hidden rounded-md bg-white p-6 text-black"
       >
         <div className="flex items-center justify-between">
           <span className="text-lg font-medium">Add new card</span>

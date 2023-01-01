@@ -4,6 +4,7 @@ import {
   XMarkIcon,
   ArrowDownTrayIcon,
   PencilIcon,
+  EyeIcon,
 } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { useRef, useState } from "react";
@@ -16,6 +17,7 @@ const FlashCard = ({ title, img, id, hints, refetch }) => {
   const myComponentRef = useRef(null);
   const [deleteModel, setDeleteModel] = useState(false);
   const [editModel, setEditModel] = useState(false);
+  const [viewModel, setViewModel] = useState(false);
 
   const handleDelete = async () => {
     return await axios.delete("/api/card/" + id).then(() => refetch());
@@ -59,11 +61,13 @@ const FlashCard = ({ title, img, id, hints, refetch }) => {
       </AnimatePresence>
       <div className="flex items-center gap-x-5">
         <img
+          onClick={() => setViewModel(true)}
           style={{
             backgroundImage: `url(data:image/png;base64,${Buffer.from(
               img
             ).toString("base64")})`,
             backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
           }}
           className="h-20 w-20 rounded-lg border-2 border-red-400"
         />
@@ -72,7 +76,7 @@ const FlashCard = ({ title, img, id, hints, refetch }) => {
       <div className="absolute -top-96 -left-96" ref={myComponentRef}>
         <DownloadableCard img={img} title={title} />
       </div>
-      <div className="flex items-center gap-x-2">
+      <div className="flex items-center gap-x-1">
         <AnimatePresence>
           {deleteModel ? (
             <motion.div
@@ -107,25 +111,71 @@ const FlashCard = ({ title, img, id, hints, refetch }) => {
               </div>
             </motion.div>
           ) : (
-            <>
-              <ArrowDownTrayIcon
-                onClick={() => downloadImage(myComponentRef.current)}
-                className="h-10 w-10 p-2 bg-green-500 hover:bg-green-600 
+            <div className="flex items-center gap-x-1 md:gap-x-5">
+              <div className="flex items-center gap-x-1">
+                <EyeIcon
+                  onClick={() => setViewModel(true)}
+                  className="hidden sm:inline-flex h-10 w-10 p-2 bg-orange-500 hover:bg-orange-600 
               transition-all ease-in-out rounded-lg text-white cursor-pointer"
-              />
-              <PencilIcon
-                onClick={() => setEditModel(true)}
-                className="h-10 w-10 p-2 bg-blue-500 hover:bg-blue-600 
+                />
+                <ArrowDownTrayIcon
+                  onClick={() => downloadImage(myComponentRef.current)}
+                  className="h-10 w-10 p-2 bg-green-500 hover:bg-green-600 
               transition-all ease-in-out rounded-lg text-white cursor-pointer"
-              />
-              <TrashIcon
-                className="h-10 w-10 btn p-2 cursor-pointer"
-                onClick={() => setDeleteModel(true)}
-              />
-            </>
+                />
+              </div>
+              <div className="flex items-center gap-x-1">
+                <PencilIcon
+                  onClick={() => setEditModel(true)}
+                  className="h-10 w-10 p-2 bg-blue-500 hover:bg-blue-600 
+              transition-all ease-in-out rounded-lg text-white cursor-pointer"
+                />
+                <TrashIcon
+                  className="h-10 w-10 btn p-2 cursor-pointer"
+                  onClick={() => setDeleteModel(true)}
+                />
+              </div>
+            </div>
           )}
         </AnimatePresence>
       </div>
+      <AnimatePresence>
+        {viewModel && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 0.3,
+              },
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            onClick={() => setViewModel(false)}
+            className="fixed top-0 left-0 right-0 bottom-0 z-50 flex 
+        h-screen w-screen items-center justify-center backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{
+                scale: 1,
+                transition: {
+                  duration: 0.3,
+                },
+              }}
+              exit={{
+                scale: 0,
+              }}
+              className="relative shadow-lg overflow-hidden rounded-md bg-white p-6 text-black"
+            >
+              <DownloadableCard img={img} title={title} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

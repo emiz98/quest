@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primary,
+      backgroundColor: secondary,
       body: Padding(
         padding: const EdgeInsets.all(app_padding),
         child: Stack(
@@ -110,7 +110,7 @@ class _HomeState extends State<Home> {
                         'assets/lotties/happy.json',
                       )
                     : Lottie.asset(
-                        'assets/lotties/idle1.json',
+                        'assets/lotties/idle_pre.json',
                       )),
             Align(
                 alignment: Alignment.bottomRight,

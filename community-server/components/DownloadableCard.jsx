@@ -7,13 +7,14 @@ const DownloadableCard = ({ img, title }) => {
       className="bg-white flex flex-col items-center w-[18rem]
     justify-center border-2 border-red-500 rounded-lg px-8 py-5"
     >
-      <h2 className="text-4xl font-bold mb-5">{title}</h2>
+      <h2 className="text-4xl font-bold mb-10">{title}</h2>
       <img
         style={{
           backgroundImage: `url(data:image/png;base64,${Buffer.from(
             img
           ).toString("base64")})`,
           backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
         }}
         alt=""
         className="h-52 w-52 rounded-lg border-2 border-red-500 mb-10"
@@ -23,7 +24,7 @@ const DownloadableCard = ({ img, title }) => {
         height={40}
         value={title}
         displayValue={false}
-        lineColor="#3c3c3c"
+        lineColor="#000000"
       />
       {/* <QRCodeSVG value={title} /> */}
     </div>

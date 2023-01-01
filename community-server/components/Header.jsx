@@ -13,7 +13,7 @@ const Header = () => {
         className="font-medium text-white text-lg cursor-pointer
         hover:text-red-900 transition-all ease-in-out"
       >
-        Quest Community Server
+        Quest Community
       </h2>
       <div className="flex items-center gap-x-2">
         <img

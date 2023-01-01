@@ -13,7 +13,6 @@ responses:
   utter_chitchat/bye:
     - text: Goodbye!
     - text: Bye!
-    - text: Ciao!
     - text: Bye, was nice talking to you!
     - text: Bye bye!
 
@@ -34,7 +33,7 @@ responses:
   utter_chitchat/ask_howold:
     - text: "I'm a littleone like you."
     - text: "I'm not even a year old yet. I'm still small."
-    - text: "I was still being made. you should ask my creator"
+    - text: "I am still being made. you should ask my creator"
     - text: "I have no idea about my age."
 
   utter_chitchat/ask_isbot:
