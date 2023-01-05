@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_quest/palette.dart';
+import 'package:flutter_quest/animations.dart';
 import 'package:flutter_quest/widgets/SpeakBtn.dart';
 import 'package:lottie/lottie.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -12,14 +16,42 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-  bool _isAnimate = false;
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  Uint8List image = Uint8List(0);
+
+  String animation = "idle";
   late Socket socket;
 
   @override
   void initState() {
     super.initState();
     socketInit();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 800),
+    );
+    _animation = TweenSequence(
+      [
+        TweenSequenceItem(
+          tween: Tween(begin: 0.5, end: 1.0),
+          weight: 50,
+        ),
+        TweenSequenceItem(
+          tween: Tween(begin: 1.0, end: 0.5),
+          weight: 50,
+        ),
+      ],
+    ).animate(_controller);
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   void socketInit() {
@@ -58,12 +90,17 @@ class _HomeState extends State<Home> {
     _onSpeechResult(data['msg']);
   }
 
-  animateTrue() {
-    setState(() => _isAnimate = true);
+  animateTrue(anim) {
+    setState(() {
+      animation = anim;
+    });
   }
 
-  animateFalse() {
-    setState(() => _isAnimate = false);
+  animateFalse(anim) {
+    setState(() {
+      animation = anim;
+      image = Uint8List(0);
+    });
   }
 
   Future<void> _onSpeechResult(response) async {
@@ -73,22 +110,27 @@ class _HomeState extends State<Home> {
     await flutterTts.setSpeechRate(0.38);
     await flutterTts.setPitch(1);
 
-    animateTrue();
-    flutterTts.speak(response);
+    flutterTts.speak(response['phrase']);
+    if (response['animation'] == 'giveup') {
+      setState(() {
+        image = new Uint8List.fromList(response['image']['data'].cast<int>());
+      });
+    }
+    animateTrue(response['animation']);
     flutterTts.setCompletionHandler(() {
-      animateFalse();
+      animateFalse("idle");
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondary,
-      body: Padding(
-        padding: const EdgeInsets.all(app_padding),
-        child: Stack(
-          children: [
-            Align(
+      backgroundColor: primary,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(app_padding),
+            child: Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
                   onTap: () {},
@@ -104,21 +146,67 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 )),
+          ),
+          if (animation == "idle")
             Center(
-                child: _isAnimate
-                    ? Lottie.asset(
-                        'assets/lotties/happy.json',
-                      )
-                    : Lottie.asset(
-                        'assets/lotties/idle_pre.json',
-                      )),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: SpeakBtn(
-                    animateTrueFunc: animateTrue,
-                    animateFalseFunc: animateTrue)),
-          ],
-        ),
+                child: Lottie.asset(
+              idle,
+            )),
+          if (animation == "talk")
+            Center(
+                child: Lottie.asset(
+              talk,
+            )),
+          if (animation == "happy")
+            Center(
+                child: Lottie.asset(
+              happy,
+            )),
+          if (animation == "wrong")
+            Center(
+                child: Lottie.asset(
+              wrong,
+            )),
+          if (animation == "cuddle")
+            Center(
+                child: Lottie.asset(
+              cuddle,
+            )),
+          if (animation == "giveup")
+            Center(
+                child: Stack(
+              children: [
+                // Lottie.asset(
+                //   giveup,
+                // ),
+                Positioned(
+                  top: 100,
+                  left: 160,
+                  child: ScaleTransition(
+                      scale:
+                          _animation.drive(CurveTween(curve: Curves.easeInOut)),
+                      child: Row(children: [
+                        SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Image.memory(image),
+                        ),
+                        SizedBox(
+                          width: 130,
+                        ),
+                        SizedBox(
+                            height: 200, width: 200, child: Image.memory(image))
+                      ])
+                      // Image.memory(image)
+                      ),
+                ),
+              ],
+            )),
+          // Align(
+          //     alignment: Alignment.bottomRight,
+          //     child: SpeakBtn(
+          //         animateTrueFunc: animateTrue, animateFalseFunc: animateTrue)),
+        ],
       ),
     );
   }

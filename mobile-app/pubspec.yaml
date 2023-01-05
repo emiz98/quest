@@ -26,6 +26,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lotties/
+    - assets/lotties/custom/
     - assets/
   # fonts:
   #   - family: Schyler

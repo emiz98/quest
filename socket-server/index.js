@@ -14,7 +14,17 @@ app.use(cors());
 app.use(bodyParser.json());
 app.options("*", cors());
 
+let clientCount = 0;
+
 io.on("connection", function (client) {
+  // if (clientCount === 0) {
+  //   // Allow the client to connect
+  //   clientCount++;
+  // } else {
+  //   // Disconnect the client
+  //   client.disconnect();
+  // }
+
   console.log("client connect...", client.id);
 
   client.on("message", (data) => {
@@ -37,9 +47,9 @@ io.on("connection", function (client) {
 app.get("/", (req, res) => {
   res.send("Welcome to quest socket server");
 });
-app.get("/send/:message", (req, res) => {
-  io.emit("message", { msg: req.params.message });
-  res.send("Sending message");
+app.post("/send", (req, res) => {
+  io.emit("message", { msg: req.body });
+  res.send({ success: true, msg: req.body });
 });
 
 const PORT = process.env.PORT || 8080;

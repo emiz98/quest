@@ -4,7 +4,7 @@ class APIService {
   late Dio _dio;
 
   APIService() {
-    BaseOptions options = BaseOptions(
+    BaseOptions options_rasa = BaseOptions(
         receiveTimeout: 100000,
         connectTimeout: 100000,
         headers: {
@@ -12,21 +12,19 @@ class APIService {
           'Accept': 'application/json;charset=UTF-8',
         },
         baseUrl: 'http://192.168.1.32:5005/');
-    _dio = Dio(options);
-  }
 
-  // Future getChats(email) async {
-  //   try {
-  //     final response = await _dio.get('chats/$email',
-  //         options: Options(headers: {
-  //           'Content-type': 'application/json;charset=UTF-8',
-  //           'Accept': 'application/json;charset=UTF-8',
-  //         }));
-  //     return response.data;
-  //   } on DioError catch (e) {
-  //     throw e.error;
-  //   }
-  // }
+    BaseOptions options_data = BaseOptions(
+        receiveTimeout: 100000,
+        connectTimeout: 100000,
+        headers: {
+          'Content-type': 'application/json;charset=UTF-8',
+          'Accept': 'application/json;charset=UTF-8',
+        },
+        baseUrl: 'https://quest-alpha.vercel.app/');
+
+    _dio = Dio(options_rasa);
+    _dio = Dio(options_data);
+  }
 
   Future talk(String sender, String message) async {
     try {
@@ -34,6 +32,15 @@ class APIService {
         'webhooks/rest/webhook',
         data: {"sender": sender, "message": message},
       );
+      return response.data;
+    } on DioError catch (e) {
+      throw e.error;
+    }
+  }
+
+  Future getFlashCard(String id) async {
+    try {
+      final response = await _dio.get('api/card', queryParameters: {"id": id});
       return response.data;
     } on DioError catch (e) {
       throw e.error;
