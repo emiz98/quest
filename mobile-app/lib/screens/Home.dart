@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_quest/api.dart';
 import 'package:flutter_quest/palette.dart';
 import 'package:flutter_quest/animations.dart';
 import 'package:flutter_quest/widgets/SpeakBtn.dart';
@@ -17,6 +19,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  final apiService = APIService();
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -103,6 +106,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
   }
 
+  getCard(String id) async {
+    var res = await apiService.getFlashCard(id);
+    return res['data']['image']['data'];
+  }
+
   Future<void> _onSpeechResult(response) async {
     var flutterTts = FlutterTts();
 
@@ -112,8 +120,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     flutterTts.speak(response['phrase']);
     if (response['animation'] == 'giveup') {
+      final cardImage = await getCard(response['id']);
       setState(() {
-        image = new Uint8List.fromList(response['image']['data'].cast<int>());
+        image = new Uint8List.fromList(cardImage.cast<int>());
+        // image = new Uint8List.fromList(response['image']['data'].cast<int>());
       });
     }
     animateTrue(response['animation']);

@@ -129,20 +129,13 @@ for i in range(10):
             speak(talk)
 
             if (hintNum == 3 or flashCards[i]['hints'][hintNum] == ""):
-                phrase = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[1]['title'])}. Don't worry I will show you."
+                phrase = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[i]['title'])}. Don't worry I will show you."
                 talk = {
                     "phrase": phrase,
                     "animation": "giveup",
-                    "image": flashCards[1]['image']
+                    "id": flashCards[i]['_id']
                 }
                 speak(talk)
-                # phrase = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[i]['title'])}. Don't worry I will show you."
-                # talk = {
-                #     "phrase": phrase,
-                #     "animation": "giveup",
-                #     "image": flashCards[i]['image']
-                # }
-                # speak(talk)
                 break
 
             else:

@@ -1,6 +1,13 @@
 require("dotenv").config();
 require("colors");
 
+const tf = require("@tensorflow/tfjs");
+const tfnode = require("@tensorflow/tfjs-node");
+const mobilenet = require("@tensorflow-models/mobilenet");
+
+const fs = require("fs");
+const JPEG = require("jpeg-js");
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -47,6 +54,18 @@ io.on("connection", function (client) {
 app.get("/", (req, res) => {
   res.send("Welcome to quest socket server");
 });
+
+app.get("/classify", async (req, res) => {
+  const buffer = fs.readFileSync("clock.jpg");
+  // const model = await mobilenet.load();
+  // const modelUrl = new URL("keras.h5", "http://192.168.1.32");
+  const model = await tf.loadLayersModel("model.json");
+  // const tfimage = tfnode.node.decodeImage(buffer);
+  // const prediction = model.predict(tfimage);
+  // const predictions = await model.classify(tfimage, 10);
+  res.send("prediction");
+});
+
 app.post("/send", (req, res) => {
   io.emit("message", { msg: req.body });
   res.send({ success: true, msg: req.body });

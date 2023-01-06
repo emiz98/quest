@@ -40,7 +40,7 @@ class APIService {
 
   Future getFlashCard(String id) async {
     try {
-      final response = await _dio.get('api/card', queryParameters: {"id": id});
+      final response = await _dio.get('api/card/$id');
       return response.data;
     } on DioError catch (e) {
       throw e.error;
