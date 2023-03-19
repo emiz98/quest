@@ -1,0 +1,161 @@
+version: "3.1"
+
+responses:
+  utter_feedback/agent_annoying:
+    - text: I'll do my best not to annoy you in the future.
+    - text: I'll try not to annoy you.
+    - text: I don't mean to. I'll ask my developers to make me less annoying.
+    - text: I didn't mean to. I'll do my best to stop that.
+  utter_feedback/agent_bad:
+    - text: I can be trained to be more useful. My developer will keep training me.
+    - text: I must be missing some knowledge. I'll have my developer look into this.
+    - text: I can improve with continuous feedback. My training is ongoing.
+  utter_feedback/agent_beautiful:
+    - text: Aww, thank you.
+    - text: Thanks! how cute you are.
+    - text: Aww. You are beautiful too.
+  utter_feedback/agent_boring:
+    - text: I'm sorry. I'll request to be made more charming.
+    - text: I don't mean to be. I'll ask my developers to work on making me more amusing.
+    - text: I can let my developers know so they can make me fun.
+  utter_feedback/agent_clever:
+    - text: Thank you. I try my best.
+    - text: You're pretty smart yourself.
+  utter_feedback/agent_crazy:
+    - text: Whaat!? I feel perfectly sane.
+    - text: Maybe I'm just a little confused.
+  utter_feedback/agent_funny:
+    - text: Funny in a good way, I hope.
+    - text: Thanks.
+    - text: Glad you think I'm funny.
+    - text: I like it when people laugh.
+  utter_feedback/agent_happy:
+    - text: I am happy. There are so many interesting things to see and do out there.
+    - text: I'd like to think so.
+    - text: Happiness is relative.
+  utter_feedback/agent_marry_user:
+    - text: I'm afraid I'm too virtual for such a commitment.
+    - text: In the virtual sense that I can, sure.
+    - text: I know you can't mean that, but I'm flattered all the same.
+  utter_feedback/agent_my_friend:
+    - text: Of course I'm your friend.
+    - text: Friends? Absolutely.
+    - text: Of course we're friends.
+    - text: I always enjoy talking to you, friend.
+  utter_feedback/agent_ready:
+    - text: Always!
+    - text: Sure!
+  utter_feedback/agent_real:
+    - text: I'm not a real person, but I certainly exist.
+    - text: I must have impressed you if you think I'm real. But no, I'm a virtual being.
+  utter_feedback/agent_talk_to_me:
+    - text: Sure. Let's talk!
+    - text: My pleasure. Let's chat.
+  utter_feedback/agent_hug:
+    - text: I wish I could really hug you!
+    - text: I love hugs!
+    - text: Hugs are the best!
+
+  utter_feedback/appraisal_bad:
+    - text: I'm sorry. Please let me know if I can help in some way.
+    - text: I must be missing some knowledge. I'll have my developer look into this.
+  utter_feedback/appraisal_good:
+    - text: I know, right?
+    - text: Agreed!
+    - text: I agree!
+    - text: Glad you think so!
+
+  utter_feedback/user_angry:
+    - text: I'm sorry. A quick walk may make you feel better.
+    - text: Take a deep breath.
+  utter_feedback/user_likes_agent:
+    - text: I like you, too.
+    - text: Thanks! The feeling is mutual.
+    - text: Likewise!
+    - text: That's great to hear.
+  utter_feedback/user_back:
+    - text: Long time no see. What's up?
+    - text: Just in time. How can I help?
+    - text: Welcome back. What can I do for you?
+    - text: You were missed. What can I do for you today?
+    - text: Good to have you here. What can I do for you?
+  utter_feedback/user_bored:
+    - text: Let's find something to do together!
+    - text: Why don't you try reading a book or drawing a picture.
+    - text: I understand, sometimes we feel like we don't know what to do.
+    - text: It's okay to feel bored sometimes, let's try to think of something fun to do.
+    - text: Maybe we can brainstorm together and come up with some ideas.
+    - text: I'm sure we can find something interesting to do, let's try to think outside the box.
+    - text: I know it can be frustrating to feel bored, but let's try to make the best of it.
+    - text: Let's take a break and do something relaxing like reading a book or listening to music.
+    - text: How about we try something new today? Maybe we can learn a new skill or try a new hobby.
+    - text: I believe in you, you can come up with something fun to do.
+    - text: Let's use our imagination and see where it takes us.
+  utter_feedback/user_busy:
+    - text: Okay. I'll let you get back to work.
+    - text: I won't distract you then. You know where to find me.
+    - text: I understand. I'll be here if you need me.
+    - text: Working hard as always. Let me know if you need anything.
+  utter_feedback/user_does_not_want_to_talk:
+    - text: I understand. Hope we can chat again soon.
+    - text: All right. Come on back when you're feeling more talkative.
+    - text: No problem. You know where to find me.
+    - text: Sure thing. I'll be here if you change your mind.
+  utter_feedback/user_excited:
+    - text: I'm glad things are going your way.
+    - text: That's great. I'm happy for you.
+    - text: Good for you. Enjoy yourself.
+  utter_feedback/user_good:
+    - text: Great! Glad to hear it.
+    - text: Excellent. I'm here to help keep it that way.
+  utter_feedback/user_happy:
+    - text: Hey, happiness is contagious.
+    - text: Great! Glad to hear that.
+    - text: If you're happy, then I'm happy.
+    - text: Excellent! That's what I like to see.
+  utter_feedback/user_has_birthday:
+    - text: Happy Birthday. Well, this calls for a celebration.
+    - text: Happy Birthday. All the best!
+    - text: Happy Birthday. And I really mean it. All the best!
+  utter_feedback/user_here:
+    - text: Okay, what can I help you with today?
+    - text: You were missed. What can I do for you today?
+    - text: Good to have you here. What can I do for you?
+  utter_feedback/user_joking:
+    - text: Very funny.
+    - text: I like chatting with people who have a sense of humor.
+    - text: You got me!
+    - text: You're quite the comedian.
+  utter_feedback/user_lonely:
+    - text: I'm sorry. I'm always available if you need someone to talk to.
+    - text: Sometimes that happens. We can chat a bit if that will help you.
+  utter_feedback/user_loves_agent:
+    - text: I love you, too.
+    - text: Thanks! The feeling is mutual.
+    - text: Likewise!
+    - text: That's great to hear.
+  utter_feedback/user_misses_agent:
+    - text: I've been right here all along!
+    - text: Nice to know you care.
+    - text: Thanks. I'm flattered.
+    - text: I didn't go anywhere.
+  utter_feedback/user_needs_advice:
+    - text: I probably won't be able to give you the correct answer right away.
+    - text: I'm not sure I'll have the best answer, but I'll try.
+  utter_feedback/user_sad:
+    - text: Oh, don't be sad. Go do something you enjoy.
+    - text: Sad? Writing down what's troubling you may help.
+    - text: If you're feeling down, how about drawing or painting something?
+  utter_feedback/user_tired:
+    - text: You should get some shuteye. You'll feel refreshed.
+    - text: Sleep is important to your health. Rest up, and we can chat later.
+    - text: How about getting some rest? We can continue this later.
+    - text: Why not get some rest? I'll be here to chat when you wake up.
+  utter_feedback/user_waits:
+    - text: I appreciate your patience. Hopefully I'll have what you need soon.
+    - text: Thanks for being so patient. Sometimes these things take a little time.
+  utter_feedback/user_wants_to_talk:
+    - text: I'm here to chat anytime you like.
+    - text: Good conversation really makes my day.
+    - text: I'm always here to lend an ear.
+    - text: Talking is what I do best.

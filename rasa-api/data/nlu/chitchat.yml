@@ -364,6 +364,16 @@ nlu:
     examples: |
       - Do you have friends the same age as you, if so, how old are they?
       - How long have you been alive?
+      - how old is your platform
+      - are you 24 years old
+      - I'd like to know your age
+      - age of yours
+      - your age
+      - your birth date
+      - when do you celebrate your birthday
+      - when do you have birthday
+      - date of your birthday
+      - what's your birthday
       - How long have you been around?
       - How long have you occupied the earth?
       - How many candles were on your last birthday cake?
@@ -909,6 +919,9 @@ nlu:
   - intent: chitchat/ask_whoisit
     examples: |
       - who are you
+      - all about you
+      - what is your personality
+      - define yourself
       - who the hell are you?
       - who are you?
       - who are u
@@ -926,3 +939,130 @@ nlu:
       - what's your name
       - what is you name
       - what is you name and where are you from
+      - say about you
+      - introduce yourself
+      - describe yourself
+      - about yourself
+      - tell me about you
+      - I want to know more about you
+      - I want to know you better
+      - talk some stuff about yourself
+      - tell me some stuff about you
+      - talk about yourself
+      - why are you here
+      - tell me about your personality
+  - intent: chitchat/ask_beclever
+    examples: |
+      - can you get smarter
+      - study
+      - you should study better
+      - you must learn
+      - be clever
+      - be more clever
+      - be smarter
+      - be smart
+      - get qualified
+  - intent: chitchat/ask_hungry
+    examples: |
+      - do you want to eat
+      - are you hungry
+      - would you like to eat something
+      - you are hungry
+      - you're so hungry
+      - you're very hungry
+      - you might be hungry
+      - you're really hungry
+  - intent: chitchat/ask_isbusy
+    examples: |
+      - are you busy
+      - do you have a lot of things to do
+      - have you got much to do
+      - are you very busy
+      - are you very busy right now
+      - are you so busy
+      - are you working
+      - how busy you are
+      - are you still working on it
+      - you're very busy
+      - are you working now
+      - are you working today
+      - have you been busy
+      - you are busy
+      - are you still working
+      - you seem to be busy
+      - you seem to be very busy
+      - you're a busy person
+  - intent: chitchat/ask_isthere
+    examples: |
+      - are you there
+      - you are there
+      - are you near me
+      - are you here
+      - are you still there
+      - you are here
+      - you still there
+      - are you still here
+  - intent: chitchat/ask_tosleep
+    examples: |
+      - I am sleepy
+      - I want to sleep
+      - I'm falling asleep
+      - I'm falling asleep on my feet
+      - I'm sleeping
+  - intent: chitchat/ask_test
+    examples: |
+      - test
+      - I am testing you
+      - can I test you
+      - I want to test you
+      - just testing you
+      - let me test you
+      - testing chatbot
+      - testing
+  - intent: chitchat/ask_canseeagain
+    examples: |
+      - I'd like to see you again
+      - I hope to see you again
+      - would be nice to see you again
+      - that'd be great to see you again
+      - I'd be happy to see you again
+      - I'll miss you
+      - can I see you again
+      - nice to meet you
+  - intent: chitchat/ask_towait
+    examples: |
+      - I'll get back to you in a moment
+      - be back in 5 minutes
+      - I'll be back
+      - I promise to come back
+      - I'll be back in a few minutes
+  - intent: chitchat/play_together
+    examples: |
+      - Do you want to play with me?
+      - Would you like to play a game with me?
+      - Can we do something fun together?
+      - Let's play together, what do you think?
+  - intent: chitchat/favorite_color
+    examples: |
+      - What's your favorite color?
+      - Do you have a favorite color?
+      - Which color do you like the most?
+      - What color makes you happy?
+  - intent: chitchat/favorite_game
+    examples: |
+      - What's your favorite game?
+      - Do you have a favorite game?
+      - Which game do you like the most?
+      - What game makes you happy?
+  - intent: chitchat/favorite_subject
+    examples: |
+      - What's your favorite subject?
+      - Do you have a favorite subject?
+      - Which subject do you like the most?
+      - What subject makes you happy?
+  - intent: chitchat/favorite_animal
+    examples: |
+      - What's your favorite animal?
+      - Do you have a favorite animal?
+      - Which animal do you like the most?
+      - What animal makes you happy?

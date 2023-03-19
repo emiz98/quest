@@ -1,0 +1,10 @@
+cloud
+umbrella
+table
+clock
+strawberry
+cup
+snowman
+fish
+car
+butterfly

@@ -8,6 +8,7 @@ from speech_to_text import speechToText
 
 url = 'http://192.168.1.32:5005/webhooks/rest/webhook'
 socketUrl = 'http://192.168.1.32:8000/send'
+nodemcuUrl = 'http://192.168.1.41/?q=90'
 
 words = ["Can you show me ", "Show me ", "I'd like to see ",
          "Would you be able to show me ", "I'm interested in seeing ",
@@ -37,7 +38,7 @@ def activity_index(arr, word):
 
 
 def identify_object():
-    cap = cv2.VideoCapture('http://192.168.1.11:8080/video')
+    cap = cv2.VideoCapture('http://192.168.1.7:8080/video')
     cv2.namedWindow('Result', cv2.WINDOW_NORMAL)
     cv2.resizeWindow('Result', 680, 500)
 
@@ -129,13 +130,14 @@ for i in range(10):
             speak(talk)
 
             if (hintNum == 3 or flashCards[i]['hints'][hintNum] == ""):
-                phrase = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[i]['title'])}. Don't worry I will show you."
+                phrase = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[i]['title'])}."
                 talk = {
                     "phrase": phrase,
                     "animation": "giveup",
                     "id": flashCards[i]['_id']
                 }
                 speak(talk)
+                time.sleep(2)
                 break
 
             else:
