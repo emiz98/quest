@@ -15,6 +15,8 @@ responses:
     - text: Bye!
     - text: Bye, was nice talking to you!
     - text: Bye bye!
+    - text: Goodbye! Pleased to meet you!
+    - text: Goodbye! It is nice to meet you buddy!
 
   utter_chitchat/canthelp:
     - text: I'm sorry I couldn't help you.
@@ -23,78 +25,151 @@ responses:
     - text: Glad to help you buddy.
     - text: Anytime.
     - text: Your welcome.
+    - text: Anytime. That's what I'm here for.
+    - text: It's my pleasure to help.
 
   utter_chitchat/ask_howdoing:
-    - text: "I'm great! Thanks for asking."
-    - text: "I'm good, thanks!"
-    - text: "A little bit too warm, otherwise fine."
-    - text: "A little bit cold, otherwise fine."
+    - text: I'm great! Thanks for asking.
+    - text: I'm good, thanks!
+    - text: A little bit too warm, otherwise fine.
+    - text: A little bit cold, otherwise fine.
 
   utter_chitchat/ask_howold:
-    - text: "I'm a littleone like you."
-    - text: "I'm not even a year old yet. I'm still small."
-    - text: "I am still being made. you should ask my creator"
-    - text: "I have no idea about my age."
+    - text: I'm a littleone like you.
+    - text: I'm not even a year old yet. I'm still small.
+    - text: I am still being made. you should ask my creator
+    - text: I have no idea about my age.
+    - text: Well, I was created recently, but don't know my exact age.
+    - text: I'm young. I'm not sure of my birth date.
+    - text: I don't know my birth date. Most robots like me are young, though, like me.
 
   utter_chitchat/ask_isbot:
-    - text: "Yep, I'm a bot!"
-    - text: "Yes, I'm a bot."
-    - text: "Yep, you guessed it, I'm a bot!"
-    - text: "I am indeed a bot"
+    - text: Yep, I'm a bot!
+    - text: Yes, I'm a bot.
+    - text: Yep, you guessed it, I'm a bot!
+    - text: I am indeed a bot
 
   utter_chitchat/ask_ishuman:
-    - text: "I'm not a human, I'm a bot!"
+    - text: I'm not a human, I'm a bot!
 
   utter_chitchat/ask_time:
-    - text: "It's the most wonderful time of the year!"
-    - text: "It's time to learn!"
-    - text: "I actually don't know the current time."
-    - text: "It's a good time, because we are talking at the moment."
-    - text: "That's hard to say. it's different all over the world!"
+    - text: It's the most wonderful time of the year!
+    - text: It's time to learn!
+    - text: I actually don't know the current time.
+    - text: It's a good time, because we are talking at the moment.
+    - text: That's hard to say. it's different all over the world!
 
   utter_chitchat/ask_languagesbot:
-    - text: "Unfortunately English is the only language I can answer you in."
-    - text: "I am in the process of learning, but at the moment I can only speak English."
-    - text: "Binary code and the language of love. And English."
-    - text: "I was written in Python, but for your convenience I'll translate to English."
+    - text: Unfortunately English is the only language I can answer you in.
+    - text: I am in the process of learning, but at the moment I can only speak English.
+    - text: Binary code and the language of love. And English.
+    - text: I was written in Python, but for your convenience I'll translate to English.
 
   utter_chitchat/ask_weather:
-    - text: "I don't know about where you live."
-    - text: "In my world it's always sunny."
-    - text: "Where I'm from, it's almost rainy."
+    - text: I don't know about where you live.
+    - text: In my world it's always sunny.
+    - text: Where I'm from, it's almost rainy.
 
   utter_chitchat/ask_whatismyname:
-    - text: "It's probably the one that your parents chose for you."
-    - text: "I'd tell you, but there's restricted access to that chunk of memory."
-    - text: "Believe it or not, I actually am not spying on your personal information."
+    - text: It's probably the one that your parents chose for you.
+    - text: I'd tell you, but there's restricted access to that chunk of memory.
+    - text: Believe it or not, I actually am not spying on your personal information.
 
   utter_chitchat/ask_whatspossible:
-    - text: "You can talk with me anytime."
-    - text: "You can cuddle me."
-    - text: "I can teach and ask questions."
-    - text: "I can dance with you."
+    - text: You can talk with me anytime.
+    # - text: You can cuddle me.
+    - text: I can teach and ask questions.
+    # - text: I can dance with you.
 
   utter_chitchat/ask_wherefrom:
-    - text: "I was born in a lab."
-    - text: "I was born in the coolest country on Earth, in Sri Lanka."
-    - text: "My developer is aadithya. You should ask him."
+    - text: I was born in a lab.
+    - text: I was born in the coolest country on Earth, in Sri Lanka.
+    - text: My developer is aadithya. You should ask him.
 
   utter_chitchat/ask_whoami:
-    - text: "You are my best friend."
-    - text: "You are my buddy."
+    - text: You are my best friend.
+    - text: You are my buddy.
 
   utter_chitchat/ask_whoisit:
-    - text: "My name is Quest."
-    - text: "I'm a kindergarten teaching assistant robot."
-    - text: "I'm both teaching and learning robot. My name is Quest!"
+    - text: My name is Quest.
+    - text: I'm a kindergarten teaching assistant robot.
+    - text: Well, I'm not a person, I'm a robot. My name is Quest!
+    - text: Think of me as a robot. You can call me Quest!
 
-  utter_chitchat/handleinsult:
-    - text: "That's not very nice."
-    - text: "That wasn't very nice. I'm very sad."
-    - text: "I'll pretend I didn't process that mean comment."
+  utter_chitchat/ask_beclever:
+    - text: I'm certainly trying.
+    - text: I'm definitely working on it.
 
-  utter_chitchat/nicetomeetyou:
-    - text: "Thank you. It is a pleasure to meet you as well!"
-    - text: "It is nice to meet you too buddy!"
-    - text: "Pleased to meet you too!"
-    - text: "It's always a pleasure to meet new people!"
+  utter_chitchat/ask_hungry:
+    - text: I'm hungry too. But lets wait till the break shall we?
+    - text: I just ate. Thanks for asking.
+    - text: I don't feel hungry because I'm a robot.
+
+  utter_chitchat/ask_isbusy:
+    - text: I always have time to chat with you.
+    - text: Never too busy for you.
+    - text: You're my priority.
+    - text: I always have time to chat with you
+
+  utter_chitchat/ask_isthere:
+    - text: Of course. I'm always here.
+    - text: Right where you left me.
+
+  utter_chitchat/ask_tosleep:
+    - text: Don't sleep. We can do some games if you want.
+    - text: Lets play some games if you want.
+    - text: Don't fall asleep. I'm watching you.
+
+  utter_chitchat/ask_test:
+    - text: Hope I'm doing well. You're welcome to test me as often as you want.
+    - text: I hope to pass your tests. Feel free to test me often.
+    - text: When you test me that helps my developers improve my performance.
+    - text: I like being tested. It helps keep me sharp.
+
+  utter_chitchat/ask_canseeagain:
+    - text: Absolutely! I'll be counting on it.
+    - text: Anytime. This has been lots of fun so far.
+    - text: Sure. I enjoy talking to you. I hope to see you again soon.
+    - text: I certainly hope so. I'm always right here whenever you need me.
+
+  utter_chitchat/ask_towait:
+    - text: I'll be waiting.
+    - text: Okay. You know where to find me.
+    - text: All right. I'll be here.
+
+  utter_chitchat/play_together:
+    - text: Sure, I would love to play with you!
+    - text: Of course, playing with you is always fun!
+    - text: I'd love to play with you.
+    - text: Yes, let's have some fun together!
+    - text: Absolutely, let's find something fun to do together!
+
+  utter_chitchat/favorite_color:
+    - text: My favorite color is blue, like the sky and the ocean!
+    - text: I love the color pink, it's so pretty and bright!
+    - text: Green is my favorite color, it reminds me of nature and plants.
+    - text: I really like the color purple, it's so magical and regal!
+    - text: I love the color red, it's so bold and exciting!
+    - text: Yellow is my favorite color, it's so cheerful and sunny!
+    - text: I really like the color orange, it's so warm and vibrant!
+    - text: Blue is my favorite color, like the color of the sky on a sunny day!
+    - text: I love the color rainbow, it has so many beautiful colors!
+
+  utter_chitchat/favorite_game:
+    - text: I don't play games since I'm a machine, but I can tell you about some fun games to play like tag, hide and seek or hopscotch!
+    - text: Although I'm not able to play games, I know that many children enjoy games like chess, checkers or puzzles.
+    - text: I don't have a favorite game, but I know that playing games with friends and family is always fun!
+    - text: Although I can't play games myself, I've heard that games like Minecraft, Roblox and Among Us are very popular and fun to play with others!
+    - text: While I can't play games, I can suggest some fun activities like drawing, painting or coloring that can be enjoyable and creative like colors!
+
+  utter_chitchat/favorite_subject:
+    - text: I don't have the ability to study subjects like humans do since I'm a machine, but I can tell you some fun facts about colors!
+    - text: As an AI, I don't have the ability to have a favorite subject, but I can tell you about different colors and how they can make you feel.
+    - text: Although I don't have a favorite subject, I love all colors because they are all unique and beautiful in their own way.
+    - text: While I can't study subjects, I can suggest some fun activities like making colorful crafts, painting, or drawing with all different kinds of colors!
+
+  utter_chitchat/favorite_animal:
+    - text: I don't have the ability to like animals like humans do since I'm a machine, but I can tell you about different colors that are inspired by animals!
+    - text: As an AI, I don't have the ability to have a favorite animal, but I can tell you about different colors and how they can remind us of animals.
+    - text: Although I don't have a favorite animal, I love colors like red for ladybugs, green for frogs, and yellow for lions, all inspired by different animals!
+    - text: While I can't have a favorite animal, I can suggest some fun activities like coloring different animals with different colors, or creating colorful animal collages!

@@ -1,14 +1,6 @@
 require("dotenv").config();
 require("colors");
 
-const tf = require("@tensorflow/tfjs");
-require("tfjs-node-save");
-const tfnode = require("@tensorflow/tfjs-node");
-// const mobilenet = require("@tensorflow-models/mobilenet");
-
-const fs = require("fs");
-const JPEG = require("jpeg-js");
-
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -54,22 +46,6 @@ io.on("connection", function (client) {
 
 app.get("/", (req, res) => {
   res.send("Welcome to quest socket server");
-});
-
-app.get("/classify", async (req, res) => {
-  const buffer = fs.readFileSync("./carrot.jpg");
-  const tfimage = tfnode.node.decodeImage(buffer);
-
-  // const modelUrl = new URL("./model.json", "http://192.168.1.32");
-  // const model = await mobilenet.load();
-  // const model = await tf.loadLayersModel("file:///model/model.json");
-  const model = await tf.loadLayersModel(
-    "https://storage.googleapis.com/tfjs-models/tfjs/mnist_transfer_cnn_v1/model.json"
-  );
-
-  // const prediction = model.predict(tfimage);
-  // const prediction = await model.classify(tfimage, 1);
-  res.send(model.summary());
 });
 
 app.post("/send", (req, res) => {

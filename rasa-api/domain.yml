@@ -1,8 +1,8 @@
 version: "3.1"
 
 intents:
-  - general
   - chitchat
+  - feedback
 
 session_config:
   session_expiration_time: 60

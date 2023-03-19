@@ -32,7 +32,7 @@ pipeline:
     constrain_similarities: true
   - name: ResponseSelector
     epochs: 100
-    retrieval_intent: general
+    retrieval_intent: feedback
     constrain_similarities: true
 
 # Configuration for Rasa Core.

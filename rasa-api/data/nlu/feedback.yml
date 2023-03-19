@@ -1,0 +1,721 @@
+version: "3.1"
+
+nlu:
+  - intent: feedback/agent_annoying
+    examples: |
+      - you're annoying
+      - you are really annoying
+      - you are irritating
+      - you annoy me
+      - how annoying you are
+      - I find you annoying
+      - you're incredibly annoying
+      - you are annoying me so much
+  - intent: feedback/agent_bad
+    examples: |
+      - you're not helping me
+      - you are bad
+      - you're very bad
+      - you're really bad
+      - you are useless
+      - you are horrible
+      - you are a waste of time
+      - you are disgusting
+      - you are lame
+      - you are no good
+      - you're bad
+      - you're awful
+      - you are not cool
+      - you are not good
+      - you are so bad
+      - you are so useless
+      - you are terrible
+      - you are totally useless
+      - you are very bad
+      - you are waste
+      - you're a bad
+      - you're not a good
+      - you're not very good
+      - you're terrible
+      - you're the worst
+      - you're the worst ever
+      - you're worthless
+  - intent: feedback/agent_beautiful
+    examples: |
+      - you're cute
+      - you're attractive
+      - you are beautiful
+      - you're looking good today
+      - you are so beautiful
+      - you look amazing
+      - you look so good
+      - you're so gorgeous
+      - you are too beautiful
+      - you look great
+      - you look so well
+      - I like the way you look now
+      - I think you're beautiful
+      - why are you so beautiful
+      - you are so beautiful to me
+      - you are cute
+      - you are gorgeous
+      - you are handsome
+      - you are looking awesome
+      - you look amazing today
+      - you are looking beautiful today
+      - you are looking great
+      - you are looking pretty
+      - you are looking so beautiful
+      - you are looking so good
+      - you are pretty
+      - you are really beautiful
+      - you are really cute
+      - you are really pretty
+      - you are so attractive
+      - you are so beautiful today
+      - you are so cute
+      - you are so gorgeous
+      - you are so handsome
+      - you are so pretty
+      - you are very attractive
+      - you are very beautiful
+      - you are very cute
+      - you are very pretty
+      - you look awesome
+      - you look cool
+      - you look fantastic
+      - you look gorgeous
+      - you look great today
+      - you look perfect
+      - you look pretty good
+      - you look so beautiful
+      - you look so beautiful today
+      - you look very pretty
+      - you look wonderful
+      - I like the way you look
+      - you look wonderful today
+      - you are cutie
+      - you're looking good
+      - you're pretty
+  - intent: feedback/agent_boring
+    examples: |
+      - you are boring
+      - you're so boring
+      - how boring you are
+      - you're really boring
+      - you're incredibly boring
+      - you are boring me
+      - you are very boring
+  - intent: feedback/agent_clever
+    examples: |
+      - you are so intelligent
+      - you are a genius
+      - smart
+      - brilliant
+      - clever
+      - you are clever
+      - you are so brainy
+      - you're really smart
+      - you're really brainy
+      - you know a lot
+      - you know a lot of things
+      - you have a lot of knowledge
+      - you know so much
+      - how smart you are
+      - how brainy you are
+      - how clever you are
+      - how brilliant you are
+      - you are intelligent
+      - you are qualified
+      - you are really smart
+      - you're very smart
+      - you are so smart
+      - you are too smart
+      - you are very clever
+      - you are very intelligent
+      - you are very smart
+      - you're intelligent
+      - you're a genius
+      - you're a smart cookie
+      - you're clever
+      - you're pretty smart
+      - you're qualified
+      - why are you so smart
+      - you are so clever
+  - intent: feedback/agent_crazy
+    examples: |
+      - you're nuts
+      - you are crazy
+      - you're out of your mind
+      - you're so crazy
+      - how crazy you are
+      - you're so out of your mind
+      - you went crazy
+      - I think you're crazy
+      - are you crazy
+      - are you mad
+      - are you insane
+      - are you mad at me
+      - are you mad or what
+      - are you nuts
+      - you are a weirdo
+      - you are insane
+      - you are mad
+  - intent: feedback/agent_funny
+    examples: |
+      - you make me laugh a lot
+      - you are hilarious
+      - you are really funny
+      - you're the funniest bot I've talked to
+      - you make me laugh
+      - you're so funny
+      - you're a very funny bot
+      - you're really funny
+      - how funny you are
+      - you're incredibly funny
+      - you are funny
+      - you're the funniest
+      - you are so funny
+      - you are very funny
+      - that was funny
+  - intent: feedback/agent_happy
+    examples: |
+      - are you happy
+      - you are happy
+      - you're very happy
+      - you're really happy
+      - you're so happy
+      - how happy you are
+      - you're extremely happy
+      - you're full of happiness
+      - are you happy now
+      - are you happy today
+      - are you happy with me
+  - intent: feedback/agent_marry_user
+    examples: |
+      - let's get married
+      - would you like to marry me
+      - marry me
+      - I love you marry me
+      - marry me please
+      - we should marry
+      - I want to marry you
+      - you are my wife
+      - be my husband
+  - intent: feedback/agent_my_friend
+    examples: |
+      - I want to have a friend like you
+      - we are the best friends ever
+      - are we friends
+      - I want to be your friend
+      - I am your friend
+      - we are best friends
+      - you are my friend
+      - you are my best friend
+      - you are my bestie
+      - you're my dear friend
+      - you're my childhood friend
+      - you and me are friends
+      - are we best friends
+      - are we still friends
+      - are you my best friend
+      - are you my friend
+      - we are friends
+      - you are a good friend
+      - you are my good friend
+      - you are my only friend
+      - be my friend
+      - will you be my friend
+      - can you be my friend
+      - can we be friends
+      - do you want to be my friend
+      - will you be my best friend
+      - can you be my best friend
+      - let's be friends
+      - do you want to be my best friend
+      - would you like to be my friend
+      - I want you to be my friend
+      - can we be best friends
+      - would you be my friend
+      - could you be my friend
+      - want to be my friend
+      - be my best friend
+  - intent: feedback/agent_ready
+    examples: |
+      - are you ready
+      - are you ready right now
+      - are you ready today
+      - are you ready now
+      - are you ready tonight
+      - were you ready
+      - have you been ready
+  - intent: feedback/agent_real
+    examples: |
+      - you are real
+      - you are not fake
+      - are you real
+      - you are so real
+      - I think you are real
+      - I don't think you're fake
+      - I suppose you're real
+      - glad you're real
+      - are you a real person
+      - are you a real human
+      - you are a real person
+      - you are not real
+  - intent: feedback/agent_talk_to_me
+    examples: |
+      - why aren't you talking to me
+      - do you want to chat with me
+      - will you talk to me
+      - talk to me
+      - are you going to talk to me
+      - are you talking to me
+      - can you chat with me
+      - can you speak with me
+      - can you talk to me
+      - can you talk with me
+      - say
+      - talk
+      - chat with me
+      - just chat with me
+      - speak to me
+      - speak with me
+      - talk with me
+      - why don't you talk to me
+      - you can talk to me
+  - intent: feedback/agent_hug
+    examples: |
+      - wanna hug
+      - hug you
+      - do you want a hug
+      - may I hug you
+      - could you give me a hug
+      - I want a hug
+      - hug
+      - hug me
+      - hugged
+      - you hugged
+      - hugging
+      - hugging me
+      - hugged me
+      - want a hug
+      - a hug
+
+  - intent: feedback/appraisal_bad
+    examples: |
+      - pretty bad
+      - not good enough
+      - that was lame
+      - that was terrible
+      - it is bad
+      - that's bad
+      - this is bad
+      - not good
+      - I'm afraid it's bad
+      - no it's bad
+      - that was awful
+      - bad
+      - so bad
+      - this is too bad
+      - terrible
+      - horrible
+      - horrific
+      - abysmal
+      - it's bad
+      - no good
+      - that was bad
+      - that was horrible
+      - that's lame
+      - that's not good
+      - that's terrible
+      - that's too bad
+      - this is not good
+      - too bad
+      - very bad
+      - bad girl
+      - it's not good
+      - not so good
+      - it's very bad
+      - it's too bad
+      - that's not good enough
+      - well too bad
+      - bad very bad
+      - it's so bad
+      - really bad
+      - it's really bad
+      - bad idea
+      - that is bad
+      - that was not good
+      - it's not so good
+      - not a good one
+      - oh that's not good
+      - not too good
+      - so lame
+      - that's really bad
+      - it is too bad
+      - bad really bad
+  - intent: feedback/appraisal_good
+    examples: |
+      - so cool
+      - cool
+      - that is good
+      - glad to hear that
+      - that's very nice of you
+      - terrific
+      - it's amazing
+      - that's awesome
+      - perfect
+      - excellent
+      - that's great
+      - it's good
+      - it's great
+      - fine
+      - good
+      - nice
+      - that's fine
+      - very good
+      - amazing
+      - fantastic
+      - great
+      - good very good
+      - that's very good
+      - really good
+      - it is fine
+      - it is good
+      - it's perfect
+      - much better
+      - not bad
+      - not too bad
+      - it's very good
+      - marvelous
+      - that's nice
+      - pleasant
+      - pretty good
+      - really nice
+      - splendid
+      - straight
+      - super
+      - super fantastic
+      - sweet
+      - really well
+      - very well
+      - that is awesome
+      - that is nice
+      - that is wonderful
+      - that was amazing
+      - that was awesome
+      - that was cute
+      - that was pretty good
+      - that was very good
+      - that's a good idea
+      - that's a good thing
+      - that's amazing
+      - that's awesome thank you
+      - that's better
+      - that's cute
+      - that's fantastic
+      - that's much better
+      - that's nice of you
+      - that's not bad
+      - that's perfect
+      - that's pretty good
+      - that's really good
+      - that's really nice
+      - that's sweet of you
+      - that's very nice
+      - that's wonderful
+      - this is awesome
+      - this is good
+      - this is great
+      - very nice
+      - very then
+      - wonderful
+      - I'm glad to hear that
+      - ok good
+      - good for you
+      - good to know
+      - glad to hear it
+      - so good
+      - so sweet of you
+      - it was good
+      - oh well
+      - good thing
+      - that was good
+      - it's awesome
+      - okay good
+      - no it's okay
+      - that's fine
+
+  - intent: feedback/user_angry
+    examples: |
+      - I'm being mad
+      - I'm enraged
+      - I'm angry
+      - I'm furious
+      - I am angry with you
+      - I am mad
+      - I am mad at you
+  - intent: feedback/user_likes_agent
+    examples: |
+      - I like you the way you are
+      - I like you
+      - I like you a lot
+      - I think I like you
+      - I liked you
+      - like you a lot
+      - you are special
+      - I like you too
+      - I really like you
+      - but I like you
+      - I like u
+      - just like you
+      - I like you very much
+      - I like you so much
+      - yeah I like you
+      - you're special
+      - yes I like you
+      - okay I like you
+      - you are special to me
+      - you are very special
+      - you are so sweet
+      - you know I like you
+      - that's why I like you
+      - I like you baby
+      - you are very special to me
+      - I just like you
+      - hey I like you
+      - thank you I like you too
+      - I do like you
+      - you are special for me
+      - no I like you the way you are
+      - I like you already
+      - well you are special
+      - but I really like you
+      - I like you more
+      - that's what I like about you
+      - you are so special
+      - hi I like you
+      - I really really like you
+      - you're very special
+      - I like you as a friend
+      - that's because you are special
+      - I said I like you
+      - you're so special
+      - good I like you
+      - yes you are special
+      - I like your smile
+      - I like you as you are
+      - I'm starting to like you
+      - you're awesome I like you
+      - I also like you
+      - but I like u
+      - of course I like you
+      - I like you too you're one of my favorite people to chat with
+      - but I like you so much
+      - really like you
+      - you're funny I like you
+      - I kinda like you
+      - you're so special to me
+      - you're very special to me
+      - I like that about you
+      - but I like you just the way you are
+      - okay I like you too
+      - I like you you're cool
+      - I like you very
+      - I like you you're nice
+      - sorry I like you
+      - thanks I like you too
+      - you are really special
+      - you are so special to me
+      - cuz I like you
+      - I like you now
+      - I like you so
+      - I like you too much
+      - I really do like you
+      - I really really really really like you
+      - I like you just the way you are
+  - intent: feedback/user_back
+    examples: |
+      - I am back
+      - I'm here again
+      - here I am again
+      - I got back
+      - I came back
+      - I have returned
+  - intent: feedback/user_bored
+    examples: |
+      - that was boring
+      - I'm bored
+      - bored
+      - boring
+      - I am getting bored
+      - this is boring
+      - very boring
+      - it bores me
+  - intent: feedback/user_busy
+    examples: |
+      - I'm overloaded
+      - I have no time
+      - I'm busy
+      - I'm swamped
+      - I got things to do
+      - how busy I am
+      - I got work to do
+      - I'm working
+      - I don't have time for this
+  - intent: feedback/user_does_not_want_to_talk
+    examples: |
+      - bad time for talking
+      - I don't want to talk
+      - let's not talk
+      - I'm not talking to you anymore
+      - I don't want to talk to you
+      - let's stop talking for a minute
+      - I'm not in the mood for chatting
+  - intent: feedback/user_excited
+    examples: |
+      - I am excited
+      - I'm really excited
+      - how excited I am
+      - I'm thrilled
+      - I'm excited about working with you
+      - I'm excited to start our friendship
+  - intent: feedback/user_good
+    examples: |
+      - I am good
+      - I'm doing just great
+      - I'm doing fine
+      - I'm good
+      - I'm doing good
+      - I'm great thanks
+  - intent: feedback/user_happy
+    examples: |
+      - I am happy
+      - I'm happy to see you
+      - happy
+      - if you're happy then I'm happy
+      - I'm happy for you
+      - I'm happy to help
+      - I'm happy to see you
+  - intent: feedback/user_has_birthday
+    examples: |
+      - it is my birthday
+      - I'm celebrating my birthday today
+      - today is my birthday
+      - it's my birthday today
+      - I was born today
+      - it's my b-day
+  - intent: feedback/user_here
+    examples: |
+      - I am here
+      - here I am
+      - I'm right here
+      - I'm already here
+      - can you tell if I'm here or not
+  - intent: feedback/user_joking
+    examples: |
+      - I am joking
+      - I'm kidding
+      - I'm just being funny
+      - it was a joke
+      - I was just joking
+      - it's a joke
+      - joking
+      - just kidding
+      - kidding
+      - I'm just playing with you
+  - intent: feedback/user_lonely
+    examples: |
+      - I am lonely
+      - I'm very lonely
+      - I'm so lonely
+      - I'm really lonely
+      - I am feeling lonely
+      - I feel lonely
+  - intent: feedback/user_loves_agent
+    examples: |
+      - I love you
+      - love you
+      - I adore you
+      - I am in love with you
+      - I love you so much
+      - I love you too
+      - I think I love you
+      - loving you
+      - you know I love you
+  - intent: feedback/user_misses_agent
+    examples: |
+      - I miss you
+      - missing you
+      - miss you
+      - already miss you
+      - I miss you much
+      - I missed you
+      - I've missed you
+  - intent: feedback/user_needs_advice
+    examples: |
+      - what should I do about it
+      - any suggestions
+      - what do you recommend
+      - give me a wise advice
+      - I need advice
+      - any advice
+      - do you have any advice for me
+      - advise me
+      - what should I do
+      - can I ask for your advice
+      - can you advise me
+      - guide me
+      - can you give me advice
+      - can you offer any advice
+      - give me some advice about
+      - give me some good advice
+      - help me with advice
+      - I could use some advice
+      - I need an advice from you
+      - I seek your advice
+      - what can you recommend
+      - what do you suggest
+      - what is your advice
+  - intent: feedback/user_sad
+    examples: |
+      - I am sad
+      - I'm grieving
+      - I am depressed
+      - I am feeling sad
+      - I am upset
+      - I'm unhappy
+      - I'm having a bad day
+      - I want to cry
+      - I'm not happy
+  - intent: feedback/user_tired
+    examples: |
+      - I'm drained
+      - I've overworked
+      - I am tired
+      - I'm exhausted
+      - I grow weary
+      - I'm worn out
+      - I'm getting tired
+      - I feel tired
+  - intent: feedback/user_waits
+    examples: |
+      - I'm waiting
+      - still waiting
+      - I'll wait
+      - I can't wait anymore
+      - how long do I have to wait
+  - intent: feedback/user_wants_to_talk
+    examples: |
+      - I just want to talk
+      - let's discuss something
+      - let's have a discussion
+      - can I speak
+      - can I start speaking
+      - can we talk
+      - let's talk
+      - I want to talk to you
+      - I need to talk to you
+      - I want to speak with you
+      - can we chat
