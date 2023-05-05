@@ -7,7 +7,7 @@ from text_to_speech import text2speech
 from speech_to_text import speechToText
 
 url = 'http://192.168.1.32:5005/webhooks/rest/webhook'
-socketUrl = 'http://192.168.1.32:8000/send'
+socketUrl = 'http://192.168.1.32.1:8000/send'
 nodemcuUrl = 'http://192.168.1.41/?q=90'
 
 words = ["Can you show me ", "Show me ", "I'd like to see ",
@@ -32,7 +32,7 @@ def starts_with_vowel(word):
 
 def activity_index(arr, word):
     for i in range(len(arr)):
-        if word.lower() in arr[i]["title"].split(" ")[1].lower():
+        if word.lower() in arr[i]["title"].lower() or arr[i]["title"].lower() in word.lower():
             return i
     return -1
 

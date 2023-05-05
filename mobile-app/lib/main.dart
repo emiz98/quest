@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quest/palette.dart';
-import 'package:flutter_quest/screens/Home.dart';
-import 'package:flutter_quest/widgets/SpeakBtn.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_quest/screens/Start.dart';
+import 'package:flutter_quest/screens/Temp.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +28,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: primary,
-          visualDensity: VisualDensity.adaptivePlatformDensity),
-      home: Home(),
+          errorColor: white,
+          visualDensity: VisualDensity.standard),
+      home: const Start(),
     );
   }
 }

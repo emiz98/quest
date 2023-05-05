@@ -1,3 +1,5 @@
+const starter = 'assets/lotties/starter.json';
+
 const idle = 'assets/lotties/custom/idle.json';
 const talk = 'assets/lotties/custom/talk.json';
 const happy = 'assets/lotties/custom/happy.json';

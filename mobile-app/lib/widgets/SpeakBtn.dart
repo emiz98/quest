@@ -8,11 +8,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_tts/flutter_tts.dart';
 
 class SpeakBtn extends StatefulWidget {
-  final animateTrueFunc;
-  final animateFalseFunc;
-  const SpeakBtn(
-      {Key? key, required this.animateTrueFunc, required this.animateFalseFunc})
-      : super(key: key);
+  const SpeakBtn({Key? key}) : super(key: key);
 
   @override
   State<SpeakBtn> createState() => _SpeakBtnState();
@@ -22,9 +18,8 @@ class _SpeakBtnState extends State<SpeakBtn> {
   final apiService = APIService();
   late stt.SpeechToText _speech;
   bool _isListening = false;
-  String _text = "Say hey quest to speak with quest.";
+  String _text = "";
   double _confidence = 1.0;
-  int temp = 0;
 
   @override
   void initState() {
@@ -35,26 +30,22 @@ class _SpeakBtnState extends State<SpeakBtn> {
   talk(String message) async {
     var res = await apiService.talk("sender_test", message);
     return res[0]['text'];
-    // return "Hello! how are you?";
   }
 
-  Future<void> _onSpeechResult(SpeechRecognitionResult result) async {
+  Future<void> _onSpeechResult(String result) async {
+    Future.delayed(const Duration(seconds: 1));
     var flutterTts = FlutterTts();
 
     await flutterTts.setLanguage("en-US");
     await flutterTts.setSpeechRate(0.4);
     await flutterTts.setPitch(1.2);
 
-    String _lastWords = (result.recognizedWords.toString().toLowerCase());
+    String _lastWords = (result.toString().toLowerCase());
 
-    if (_lastWords != "") {
+    if (_lastWords.length > 2) {
       String botResponse = await talk(_lastWords);
-      widget.animateTrueFunc();
       flutterTts.speak(botResponse);
       _speech.stop();
-      flutterTts.setCompletionHandler(() {
-        widget.animateFalseFunc();
-      });
     }
 
     // if (_lastWords.contains("quest")) {
@@ -73,15 +64,20 @@ class _SpeakBtnState extends State<SpeakBtn> {
         onError: (errorNotification) => print(errorNotification),
       );
       if (available) {
-        setState(() => _isListening = true);
         _speech.listen(
-            onResult: (result) => setState(() {
-                  _text = result.recognizedWords;
-                  _onSpeechResult(result);
-                  if (result.hasConfidenceRating && result.confidence > 0) {
-                    _confidence = result.confidence;
-                  }
-                }));
+          onResult: (result) => {
+            setState(() {
+              _isListening = true;
+              _text = result.recognizedWords;
+              if (result.hasConfidenceRating && result.confidence > 0) {
+                _confidence = result.confidence;
+              }
+              _onSpeechResult(_text);
+            })
+          },
+          listenMode: stt.ListenMode.confirmation,
+          partialResults: false,
+        );
       }
     } else {
       setState(() => _isListening = false);
@@ -91,55 +87,34 @@ class _SpeakBtnState extends State<SpeakBtn> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          "$_text - ${(_confidence * 100).toStringAsFixed(0)}%",
-          style: TextStyle(color: black.withOpacity(0.7), fontSize: 16),
-        ),
-        InkWell(
-          onTap: _listen,
-          customBorder: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Ink(
-            width: 140,
-            decoration: BoxDecoration(
-                border: Border.all(width: 4, color: secondary),
-                borderRadius: BorderRadius.circular(100)),
-            child: Padding(
-              padding: const EdgeInsets.all(2),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        color: secondary,
-                        borderRadius: BorderRadius.circular(100)),
-                    child: const Icon(
-                      Icons.mic,
-                      size: 25,
-                      color: white,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Text(
-                    "Say Quest",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 16,
-                        color: black),
-                  ),
-                ],
+    return Padding(
+      padding: const EdgeInsets.all(app_padding),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: _listen,
+            child: Ink(
+              width: 50,
+              height: 50,
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: secondary),
+              child: const Icon(
+                Icons.mic,
+                color: white,
               ),
             ),
           ),
-        ),
-      ],
+          const SizedBox(
+            width: app_padding,
+          ),
+          Text(
+            "$_text - ${(_confidence * 100).toStringAsFixed(0)}%",
+            style: TextStyle(color: black.withOpacity(0.7), fontSize: 16),
+          ),
+        ],
+      ),
     );
   }
 }

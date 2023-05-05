@@ -3,16 +3,18 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_quest/api.dart';
 import 'package:flutter_quest/palette.dart';
 import 'package:flutter_quest/animations.dart';
-import 'package:flutter_quest/widgets/SpeakBtn.dart';
+import 'package:flutter_quest/widgets/Activity.dart';
 import 'package:lottie/lottie.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final String socketIp;
+  const Home({Key? key, required this.socketIp}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -34,7 +36,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     socketInit();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 800),
     );
     _animation = TweenSequence(
       [
@@ -59,7 +61,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   void socketInit() {
     try {
-      socket = io('http://192.168.1.32:8000', <String, dynamic>{
+      socket = io(widget.socketIp, <String, dynamic>{
         'transports': ['websocket'],
         'autoConnect': false,
       });
@@ -115,8 +117,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     var flutterTts = FlutterTts();
 
     await flutterTts.setLanguage("en-US");
-    await flutterTts.setSpeechRate(0.38);
-    await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.setPitch(1.2);
 
     flutterTts.speak(response['phrase']);
     if (response['animation'] == 'giveup') {
@@ -128,8 +130,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     }
     animateTrue(response['animation']);
     flutterTts.setCompletionHandler(() {
-      animateFalse("idle");
+      if (response['animation'] != 'activity') animateFalse("idle");
     });
+  }
+
+  Future<void> triggerCuddleAnim() async {
+    animateTrue("cuddle");
+    await Future.delayed(const Duration(seconds: 2));
+    animateTrue("idle");
   }
 
   @override
@@ -138,30 +146,34 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       backgroundColor: primary,
       body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(app_padding),
-            child: Align(
-                alignment: Alignment.topRight,
-                child: InkWell(
-                  onTap: () {},
-                  child: Ink(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: secondary),
-                    child: const Icon(
-                      Icons.menu,
-                      color: white,
-                    ),
-                  ),
-                )),
+          Positioned(
+            top: 25,
+            left: 25,
+            child: InkWell(
+              onTap: () =>
+                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack),
+              child: Ink(
+                width: 50,
+                height: 50,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: tertiary),
+                child: const Icon(
+                  Icons.fullscreen,
+                  color: white,
+                ),
+              ),
+            ),
           ),
+          if (animation == "activity") Activity(),
           if (animation == "idle")
-            Center(
-                child: Lottie.asset(
-              idle,
-            )),
+            GestureDetector(
+              onTap: () => triggerCuddleAnim(),
+              child: Center(
+                  child: Lottie.asset(
+                idle,
+              )),
+            ),
           if (animation == "talk")
             Center(
                 child: Lottie.asset(
@@ -186,9 +198,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             Center(
                 child: Stack(
               children: [
-                // Lottie.asset(
-                //   giveup,
-                // ),
                 Positioned(
                   top: 100,
                   left: 160,
@@ -201,21 +210,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           width: 200,
                           child: Image.memory(image),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 130,
                         ),
                         SizedBox(
                             height: 200, width: 200, child: Image.memory(image))
-                      ])
-                      // Image.memory(image)
-                      ),
+                      ])),
                 ),
               ],
             )),
-          // Align(
-          //     alignment: Alignment.bottomRight,
-          //     child: SpeakBtn(
-          //         animateTrueFunc: animateTrue, animateFalseFunc: animateTrue)),
+          // Align(alignment: Alignment.topLeft, child: SpeakBtn()),
         ],
       ),
     );

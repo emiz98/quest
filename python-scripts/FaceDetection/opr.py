@@ -19,7 +19,8 @@ def remap(value_to_map, new_range_min, new_range_max, old_range_min, old_range_m
 def find_face(image_to_check, max_target_distance):
     # convert image to black and white
     gray = cv2.cvtColor(image_to_check, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.1, 20)  # look for faces
+    faces = face_cascade.detectMultiScale(
+        gray, scaleFactor=2.5, minNeighbors=1)
 
     if len(faces) >= 1:  # if face(s) detected
         faces = list(faces)[0]  # if several faces found use the first one

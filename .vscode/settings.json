@@ -1,12 +1,17 @@
 {
-    "python.analysis.typeCheckingMode": "off",
-    "cSpell.words": [
-        "argsort",
-        "imread",
-        "imshow",
-        "keras",
-        "matplotlib",
-        "nodemcu",
-        "pyplot"
-    ]
+  "python.analysis.typeCheckingMode": "off",
+  "cSpell.words": [
+    "ARGB",
+    "argsort",
+    "autovalidate",
+    "fullscreen",
+    "imread",
+    "imshow",
+    "imutils",
+    "keras",
+    "matplotlib",
+    "nodemcu",
+    "pyplot",
+    "rasa"
+  ]
 }

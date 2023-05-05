@@ -18,7 +18,7 @@ model = keras.models.load_model(f'{model_folder}/model.h5')  # Load the model
 # model.summary()
 
 
-def get_predictions(image_path):
+def get_predictions(image_path, predict_count=5):
     # contour_path = draw_contours(f"{os.getcwd()}/{image_path}")
     # processed_path = preprocess_image(contour_path)
 
@@ -32,7 +32,7 @@ def get_predictions(image_path):
 
     # predict
     pred = model.predict(np.expand_dims(img, axis=0))[0]
-    ind = (-pred).argsort()[:5]
+    ind = (-pred).argsort()[:predict_count]
     latex = [class_names[x] for x in ind]
 
     percentages = pred / np.sum(pred) * 100
@@ -44,12 +44,13 @@ def get_predictions(image_path):
 
 
 test = False
+predict_count = 3
 if (test):
-    img = cv2.imread(f'{os.getcwd()}/images/church.png')
-    latex, percentages, squeezed_image = get_predictions(img)
+    img = cv2.imread(f'{os.getcwd()}/images/table.png')
+    latex, percentages, squeezed_image = get_predictions(img, predict_count)
 
     max_percentages = []
-    for i in range(5):
+    for i in range(predict_count):
         index = np.argmax(percentages)  # Get the index of the maximum element
         max_percentages.append(percentages[index])
 

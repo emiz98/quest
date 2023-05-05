@@ -45,7 +45,7 @@ def draw_contours(image):
     # image = cv2.imread(image)  # Load the image
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
     gray = cv2.GaussianBlur(gray, (3, 3), 0)  # Blur the image to reduce noise
-    edges = cv2.Canny(gray, 50, 150, apertureSize=3)  # Detect edges
+    edges = cv2.Canny(gray, 100, 50, apertureSize=3)  # Detect edges
     contours, hierarchy = cv2.findContours(
         edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # Find contours
 
@@ -78,15 +78,15 @@ if (test):
     get_predictions(cv2.imread("images/processed.jpg"))
 
     # plot_before_after(cv2.imread(original), cv2.imread(
-    #     original), cv2.imread(original))
-    cv2.namedWindow('original', cv2.WINDOW_NORMAL)
-    cv2.resizeWindow('original', 680, 500)
-    cv2.namedWindow('contour', cv2.WINDOW_NORMAL)
-    cv2.resizeWindow('contour', 680, 500)
-    cv2.namedWindow('processed', cv2.WINDOW_NORMAL)
-    cv2.resizeWindow('processed', 680, 500)
+    #     contour), cv2.imread(processed))
+    # cv2.namedWindow('original', cv2.WINDOW_NORMAL)
+    # cv2.resizeWindow('original', 680, 500)
+    # cv2.namedWindow('contour', cv2.WINDOW_NORMAL)
+    # cv2.resizeWindow('contour', 680, 500)
+    # cv2.namedWindow('processed', cv2.WINDOW_NORMAL)
+    # cv2.resizeWindow('processed', 680, 500)
 
-    cv2.imshow('original', original)
-    cv2.imshow('contour', contour)
-    cv2.imshow('processed', processed)
-    cv2.waitKey(0)
+    # cv2.imshow('original', original)
+    # cv2.imshow('contour', contour)
+    # cv2.imshow('processed', processed)
+    # cv2.waitKey(0)

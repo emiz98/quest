@@ -1,19 +1,13 @@
 import cv2
 import imutils
-import math
-import time
 import random
 import opr
 import requests
+import concurrent.futures
 
 URL = 'http://192.168.1.41'
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-# cap = cv2.VideoCapture('http://192.168.1.36:81/stream')
 cap = cv2.VideoCapture('http://192.168.1.7:8080/video')
-
-# cv2.namedWindow("Frame", cv2.WINDOW_AUTOSIZE)
-windowWidth = 600
-
 reset = True
 
 # while cap.isOpened():
@@ -205,13 +199,17 @@ class App():
             return img
 
     def record(self):  # video recording
+        frame_count = 0
+
         while (self.rec):
             _, img = cap.read()  # CAPTURE IMAGE
             processed_img = self.image_process(img)
-            frame = imutils.resize(processed_img, width=windowWidth)
-            cv2.imshow('Frame', frame)  # update image in window
-            print(self.target_pan)
-            requests.get(url=URL, params={'q': str(180-self.target_pan)})
+            # update image in window
+            cv2.imshow('Frame', imutils.resize(processed_img, width=600))
+
+            frame_count += 1
+            if (frame_count % 15 == 0):
+                requests.get(url=URL, params={'q': str(180-self.target_pan)})
 
             # self.move_servos()  # move servos
 
