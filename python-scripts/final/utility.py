@@ -1,9 +1,20 @@
 import time
+import re
 import requests
 import speech_recognition as sr
 from pocketsphinx import LiveSpeech
 
 socketUrl = 'http://192.168.1.32:8000/send'
+nodemcuUrl = 'http://192.168.1.41'
+
+
+def contains_number(string):
+    pattern = r'\d+'
+    return bool(re.search(pattern, string))
+
+
+def rotate_head(angle):
+    requests.get(url=nodemcuUrl, params={'q': str(180-angle)})
 
 
 def speak(obj, sleep=4):

@@ -1,7 +1,7 @@
 import cv2
 from pyzbar.pyzbar import decode
 import requests
-from utility import speak
+from utility import speak, speechToText, contains_number
 from enum import Enum
 import random
 
@@ -38,7 +38,7 @@ def identify_object():
             # cv2.polylines(img, [pts], True, (255, 0, 0), 5)
             # cv2.putText(img, data, (barcode.rect[0], barcode.rect[1]),cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
-            if (data):
+            if (data and not contains_number(data)):
                 print(data)
                 varBreak = False
                 cv2.destroyAllWindows()
@@ -53,6 +53,9 @@ def identify_object():
 
 
 def flash_card():
+
+    score = 0
+
     class Animation(str, Enum):
         IDLE = 'idle',
         TALK = 'talk',
@@ -61,6 +64,12 @@ def flash_card():
         CUDDLE = 'cuddle',
         GIVEUP = 'giveup',
         ACTIVITY = 'activity'
+
+    talk = {
+        "phrase": "Awesome! Can you wait for a moment?",
+        "animation": Animation.TALK.value,
+    }
+    speak(talk)
 
     words = ["Can you show me ", "Show me ", "I'd like to see ",
              "Would you be able to show me ", "I'm interested in seeing ",
@@ -71,14 +80,14 @@ def flash_card():
     activityIndex = -1
 
     talk = {
-        "phrase": "Great! What activity would you like?",
+        "phrase": "Great! I have them right here! What activity would you like?",
         "animation": Animation.ACTIVITY.value,
     }
     speak(talk)
 
     while True:
-        activityChosen = 'fruits'
-        # activityChosen = speechToText()
+        # activityChosen = 'fruits'
+        activityChosen = speechToText()
         tempIndex = activity_index(activity_data, activityChosen)
         print(tempIndex)
         if tempIndex == -1:
@@ -121,6 +130,7 @@ def flash_card():
                     "animation": Animation.HAPPY.value
                 }
                 speak(talk)
+                score += 1
                 break
             else:
                 phrase = f"That's incorrect. Thats {starts_with_vowel(identified_object)}."
@@ -131,13 +141,19 @@ def flash_card():
                 speak(talk)
 
                 if (hintNum == 3 or flashCards[i]['hints'][hintNum] == ""):
-                    phrase = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[i]['title'])}."
-                    talk = {
-                        "phrase": phrase,
+                    phrase1 = f"Looks like you have trouble with finding {starts_with_vowel(flashCards[i]['title'])}. Dont worry I will show you."
+                    phrase2 = f"Here's {starts_with_vowel(flashCards[i]['title'])}."
+                    talk1 = {
+                        "phrase": phrase1,
+                        "animation": Animation.TALK.value,
+                    }
+                    talk2 = {
+                        "phrase": phrase2,
                         "animation": Animation.GIVEUP.value,
                         "id": flashCards[i]['_id']
                     }
-                    speak(talk)
+                    speak(talk1, sleep=6)
+                    speak(talk2)
                     break
 
                 else:
@@ -148,3 +164,10 @@ def flash_card():
                     }
                     speak(talk, int(len(flashCards[0]['hints'][1])/6))
                     hintNum = hintNum+1
+
+    phrase = f"Awesome! We have finished the activity. You have scored {score} out of {len(flashCards)}. Let's play another activity later."
+    talk = {
+        "phrase": phrase,
+        "animation": Animation.HAPPY.value
+    }
+    speak(talk, sleep=6)

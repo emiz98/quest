@@ -69,7 +69,7 @@ const FlashCard = ({ title, img, id, hints, refetch }) => {
             backgroundSize: "contain",
             backgroundRepeat: "no-repeat",
           }}
-          className="h-20 w-20 rounded-lg border-2 border-red-400"
+          className="h-20 w-20 rounded-lg border-2 border-red-400 cursor-pointer"
         />
         <h2 className="text-lg font-medium">{title}</h2>
       </div>

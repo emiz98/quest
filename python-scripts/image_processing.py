@@ -44,7 +44,8 @@ def preprocess_image(contour_path):
 def draw_contours(image):
     # image = cv2.imread(image)  # Load the image
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
-    gray = cv2.GaussianBlur(gray, (3, 3), 0)  # Blur the image to reduce noise
+    # Blur the image to reduce noise
+    gray = cv2.GaussianBlur(gray, (3, 3), 0)
     edges = cv2.Canny(gray, 100, 50, apertureSize=3)  # Detect edges
     contours, hierarchy = cv2.findContours(
         edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # Find contours
@@ -59,7 +60,7 @@ def draw_contours(image):
     cv2.drawContours(blank_image, shifted_contours, -1, (255, 255, 255), 2)
 
     # # Draw the contour on the original image
-    # cv2.drawContours(blank_image, [c], -1, (255, 255, 255), 2)
+    # cv2.drawContours(blank_image, contours, -1, (255, 255, 255), 2)
 
     flipped_image = cv2.flip(blank_image, 1)
 
@@ -69,10 +70,32 @@ def draw_contours(image):
     return contour_path
 
 
+def test_func(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray = cv2.GaussianBlur(gray, (3, 3), 0)
+    edges = cv2.Canny(gray, 30, 200)
+    contours, hierarchy = cv2.findContours(
+        edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+    cv2.drawContours(image, contours, -1, (0, 255, 0), 3)
+
+    blank_image = np.zeros((558, 560, 3))
+
+    # Find the contour with the largest area
+    cx = max(contours, key=cv2.contourArea)
+    scaled_contours = [(((c / 1200) * 560)).astype(int) for c in cx]
+    shifted_contours = [c + np.array([-100, 0]) for c in scaled_contours]
+    cv2.drawContours(blank_image, shifted_contours, -1, (255, 255, 255), 2)
+
+    contour_path = "images/contour.jpg"
+    cv2.imwrite(contour_path, blank_image)
+
+    return contour_path
+
+
 test = True
 if (test):
-    original = cv2.imread("images/original.jpg")
-    contour = cv2.imread(draw_contours(original))
+    original = cv2.imread("images/test4.jpg")
+    contour = cv2.imread(test_func(original))
     processed = cv2.imread(preprocess_image("images/contour.jpg"))
 
     get_predictions(cv2.imread("images/processed.jpg"))

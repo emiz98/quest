@@ -31,8 +31,12 @@ responses:
   utter_chitchat/ask_howdoing:
     - text: I'm great! Thanks for asking.
     - text: I'm good, thanks!
-    - text: A little bit too warm, otherwise fine.
-    - text: A little bit cold, otherwise fine.
+    - text: I'm doing great, thank you!
+    - text: I'm feeling good today, thanks for asking!
+    - text: I'm feeling happy today, thanks for asking!
+    - text: I'm feeling excited today, thanks for asking!
+    - text: I'm feeling great today, thanks for asking!
+    - text: I'm doing pretty well, thanks for asking!
 
   utter_chitchat/ask_howold:
     - text: I'm a littleone like you.

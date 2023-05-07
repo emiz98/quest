@@ -63,6 +63,28 @@ def draw_contours(image):
     return contour_path
 
 
+def test_func(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray = cv2.GaussianBlur(gray, (3, 3), 0)
+    edges = cv2.Canny(gray, 30, 200)
+    contours, hierarchy = cv2.findContours(
+        edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+    cv2.drawContours(image, contours, -1, (0, 255, 0), 3)
+
+    blank_image = np.zeros((558, 560, 3))
+
+    # Find the contour with the largest area
+    cx = max(contours, key=cv2.contourArea)
+    scaled_contours = [(((c / 1200) * 560)).astype(int) for c in cx]
+    shifted_contours = [c + np.array([-100, 0]) for c in scaled_contours]
+    cv2.drawContours(blank_image, shifted_contours, -1, (255, 255, 255), 2)
+
+    contour_path = "images/contour.jpg"
+    cv2.imwrite(contour_path, blank_image)
+
+    return contour_path
+
+
 def get_predictions(image_path, predict_count=5):
     # contour_path = draw_contours(f"{os.getcwd()}/{image_path}")
     # processed_path = preprocess_image(contour_path)
@@ -99,7 +121,8 @@ cv2.resizeWindow('Processed', 680, 500)
 while True:
     _, frame = cap.read()  # Capture a frame from the webcam
 
-    contour_path = draw_contours(frame)
+    contour_path = test_func(frame)
+    # contour_path = draw_contours(frame)
     processed_path = preprocess_image(contour_path)
 
     # Display the original frame and the filtered frame

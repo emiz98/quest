@@ -68,7 +68,7 @@ class _StartState extends State<Start> {
               : Form(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   key: formKey,
-                  child: Padding(
+                  child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 250),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

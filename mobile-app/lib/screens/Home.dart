@@ -136,6 +136,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   Future<void> triggerCuddleAnim() async {
     animateTrue("cuddle");
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     await Future.delayed(const Duration(seconds: 2));
     animateTrue("idle");
   }
@@ -146,26 +147,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       backgroundColor: primary,
       body: Stack(
         children: [
-          Positioned(
-            top: 25,
-            left: 25,
-            child: InkWell(
-              onTap: () =>
-                  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack),
-              child: Ink(
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: tertiary),
-                child: const Icon(
-                  Icons.fullscreen,
-                  color: white,
-                ),
-              ),
-            ),
-          ),
-          if (animation == "activity") Activity(),
+          // Positioned(
+          //   top: 35,
+          //   left: 35,
+          //   child: InkWell(
+          //     onTap: () =>
+          //         SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack),
+          //     child: Ink(
+          //       width: 50,
+          //       height: 50,
+          //       decoration: const BoxDecoration(
+          //           borderRadius: BorderRadius.all(Radius.circular(10)),
+          //           color: tertiary),
+          //       child: const Icon(
+          //         Icons.fullscreen,
+          //         color: white,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          if (animation == "activity") const Activity(),
           if (animation == "idle")
             GestureDetector(
               onTap: () => triggerCuddleAnim(),

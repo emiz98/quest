@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quest/palette.dart';
 import 'package:flutter_quest/screens/Start.dart';
-import 'package:flutter_quest/screens/Temp.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, systemNavigationBarColor: primary));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeLeft,
