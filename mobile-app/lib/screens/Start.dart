@@ -17,6 +17,7 @@ class Start extends StatefulWidget {
 class _StartState extends State<Start> {
   final formKey = GlobalKey<FormState>();
   final ipController = TextEditingController();
+  final nodeController = TextEditingController();
   final portController = TextEditingController();
   late Timer _timer;
   bool _isPlaying = false;
@@ -27,6 +28,7 @@ class _StartState extends State<Start> {
     _playAnimation();
     ipController.text = "192.168.1.32";
     portController.text = "8000";
+    nodeController.text = "192.168.1.41";
   }
 
   @override
@@ -82,6 +84,14 @@ class _StartState extends State<Start> {
                           height: 10,
                         ),
                         InputField(
+                            text: "Nodemcu address",
+                            icon: Icons.adb_sharp,
+                            controller: nodeController,
+                            error: 'Please enter node address'),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        InputField(
                             text: "Port",
                             icon: Icons.electrical_services_rounded,
                             controller: portController,
@@ -108,6 +118,8 @@ class _StartState extends State<Start> {
                                       builder: (context) => Home(
                                             socketIp:
                                                 "http://${ipController.text}:${portController.text}",
+                                            nodeIp:
+                                                "http://${nodeController.text}",
                                           )),
                                 );
                               }

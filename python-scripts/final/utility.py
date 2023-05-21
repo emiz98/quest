@@ -4,22 +4,29 @@ import requests
 import speech_recognition as sr
 from pocketsphinx import LiveSpeech
 
-socketUrl = 'http://192.168.1.32:8000/send'
-nodemcuUrl = 'http://192.168.1.41'
+socketUrl = "http://192.168.1.32:8000/send"
+nodemcuUrl = "http://192.168.1.41"
 
 
 def contains_number(string):
-    pattern = r'\d+'
+    pattern = r"\d+"
     return bool(re.search(pattern, string))
 
 
 def rotate_head(angle):
-    requests.get(url=nodemcuUrl, params={'q': str(180-angle)})
+    requests.get(url=nodemcuUrl, params={"q": str(180 - angle)})
+
+
+def happy_anim():
+    requests.get(url=nodemcuUrl + "/happy")
+
+
+def sad_anim():
+    requests.get(url=nodemcuUrl + "/sad")
 
 
 def speak(obj, sleep=4):
-    requests.post(socketUrl, json=obj, headers={
-        'Content-Type': 'application/json'})
+    requests.post(socketUrl, json=obj, headers={"Content-Type": "application/json"})
     time.sleep(sleep)
 
 
@@ -40,7 +47,7 @@ def speechToText():
             r.adjust_for_ambient_noise(mic, duration=0.6)
             audio = r.listen(mic)
             print("Recognizing...")
-            query = r.recognize_google(audio, language='en-US')
+            query = r.recognize_google(audio, language="en-US")
             print(query)
     except Exception as e:
         pass

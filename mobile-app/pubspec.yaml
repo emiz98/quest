@@ -29,6 +29,7 @@ flutter:
     - assets/images/
     - assets/lotties/
     - assets/lotties/custom/
+    - assets/lotties/final/
     - assets/
 
 flutter_icons:

@@ -301,7 +301,6 @@ nlu:
       - hugged me
       - want a hug
       - a hug
-
   - intent: feedback/appraisal_bad
     examples: |
       - pretty bad
@@ -446,7 +445,6 @@ nlu:
       - okay good
       - no it's okay
       - that's fine
-
   - intent: feedback/user_angry
     examples: |
       - I'm being mad

@@ -15,14 +15,6 @@ app.use(bodyParser.json());
 app.options("*", cors());
 
 io.on("connection", function (client) {
-  // if (clientCount === 0) {
-  //   // Allow the client to connect
-  //   clientCount++;
-  // } else {
-  //   // Disconnect the client
-  //   client.disconnect();
-  // }
-
   console.log("client connect...", client.id);
 
   client.on("message", (data) => {

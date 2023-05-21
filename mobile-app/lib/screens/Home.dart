@@ -1,9 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_quest/api.dart';
 import 'package:flutter_quest/palette.dart';
 import 'package:flutter_quest/animations.dart';
@@ -14,7 +12,9 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 class Home extends StatefulWidget {
   final String socketIp;
-  const Home({Key? key, required this.socketIp}) : super(key: key);
+  final String nodeIp;
+  const Home({Key? key, required this.socketIp, required this.nodeIp})
+      : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -30,9 +30,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String animation = "idle";
   late Socket socket;
 
+  late Timer sleepTimer;
+  int elapsedTime = 0;
+
   @override
   void initState() {
     super.initState();
+    startTimer();
     socketInit();
     _controller = AnimationController(
       vsync: this,
@@ -57,6 +61,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void dispose() {
     super.dispose();
     _controller.dispose();
+  }
+
+  void startTimer() {
+    sleepTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (elapsedTime > 120) {
+          elapsedTime = 0;
+          animation = "sleep";
+        } else {
+          elapsedTime++;
+        }
+      });
+    });
   }
 
   void socketInit() {
@@ -92,6 +109,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   // Listen to all message events from connected users
   void handleMessage(data) {
     print(data);
+    setState(() {
+      elapsedTime = 0;
+    });
     _onSpeechResult(data['msg']);
   }
 
@@ -111,6 +131,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   getCard(String id) async {
     var res = await apiService.getFlashCard(id);
     return res['data']['image']['data'];
+  }
+
+  cuddleAnim() async {
+    var res = await apiService.cuddleAnimation(widget.nodeIp);
+    return res;
   }
 
   Future<void> _onSpeechResult(response) async {
@@ -135,8 +160,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   Future<void> triggerCuddleAnim() async {
+    setState(() {
+      elapsedTime = 0;
+    });
+
+    var flutterTts = FlutterTts();
+
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setSpeechRate(0.6);
+    await flutterTts.setPitch(1.2);
+
     animateTrue("cuddle");
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    cuddleAnim();
+    flutterTts.speak("hehe! hehe!");
     await Future.delayed(const Duration(seconds: 2));
     animateTrue("idle");
   }
@@ -145,11 +181,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primary,
-      body: Stack(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Positioned(
-          //   top: 35,
-          //   left: 35,
+          //   top: 10,
+          //   left: 10,
           //   child: InkWell(
           //     onTap: () =>
           //         SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack),
@@ -170,10 +208,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           if (animation == "idle")
             GestureDetector(
               onTap: () => triggerCuddleAnim(),
-              child: Center(
-                  child: Lottie.asset(
+              child: Lottie.asset(
                 idle,
-              )),
+              ),
             ),
           if (animation == "talk")
             Center(
@@ -185,6 +222,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 child: Lottie.asset(
               happy,
             )),
+          if (animation == "sleep")
+            GestureDetector(
+              onTap: () => triggerCuddleAnim(),
+              child: Center(
+                  child: Lottie.asset(
+                sleep,
+              )),
+            ),
           if (animation == "wrong")
             Center(
                 child: Lottie.asset(

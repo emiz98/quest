@@ -4,18 +4,38 @@
     "ARGB",
     "argsort",
     "autovalidate",
+    "beclever",
+    "canseeagain",
+    "canthelp",
     "facedetection",
     "frontalface",
     "fullscreen",
     "GIVEUP",
     "haarcascade",
+    "howdoing",
+    "howold",
     "imread",
     "imshow",
     "imutils",
+    "isbot",
+    "isbusy",
+    "ishuman",
+    "isthere",
     "keras",
+    "languagesbot",
+    "lotties",
     "matplotlib",
     "nodemcu",
     "pyplot",
-    "rasa"
-  ]
+    "rasa",
+    "tosleep",
+    "towait",
+    "whatismyname",
+    "whatspossible",
+    "whoisit"
+  ],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none"
 }

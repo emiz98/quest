@@ -57,8 +57,8 @@ class _ActivityState extends State<Activity> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CarousalItem(itemIndex * 2),
-                          CarousalItem(itemIndex * 2 + 1),
+                          CarousalItem(itemIndex * 2, true),
+                          CarousalItem(itemIndex * 2 + 1, false),
                         ],
                       )))
           // return Container(
@@ -140,41 +140,58 @@ class _ActivityState extends State<Activity> {
     );
   }
 
-  Padding CarousalItem(int itemIndex) {
+  Padding CarousalItem(int itemIndex, bool isLeftEye) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 70),
-      child: Column(
-        children: [
-          Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                  border: Border.all(color: white, width: 2),
-                  borderRadius: BorderRadius.circular(100)),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.memory(
-                  Uint8List.fromList(
-                      activities[itemIndex]['image']['data'].cast<int>()),
-                  fit: BoxFit.cover,
-                ),
-              )),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            width: 150,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            decoration: BoxDecoration(
-                color: white, borderRadius: BorderRadius.circular(10)),
-            child: Text(
-              activities[itemIndex]['title'],
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: black, fontSize: 20, fontWeight: FontWeight.w600),
+      padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 80),
+      child: SizedBox(
+        width: 250,
+        height: 250,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 30,
+              left: isLeftEye ? 50 : 0,
+              child: Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: white, width: 2),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.memory(
+                      Uint8List.fromList(
+                          activities[itemIndex]['image']['data'].cast<int>()),
+                      fit: BoxFit.cover,
+                    ),
+                  )),
             ),
-          )
-        ],
+            Positioned(
+              top: 0,
+              left: isLeftEye ? 0 : 100,
+              child: RotationTransition(
+                turns: isLeftEye
+                    ? const AlwaysStoppedAnimation(-30 / 360)
+                    : const AlwaysStoppedAnimation(30 / 360),
+                child: Container(
+                  width: 150,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  decoration: BoxDecoration(
+                      color: white, borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    activities[itemIndex]['title'],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

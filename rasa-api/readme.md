@@ -11,11 +11,21 @@
 ##### Installation steps
 
 ```bash
+conda create -n install_demo python=3.8
+conda activate install_demo
+python -m pip uninstall pip
+python -m ensurepip
+python -m pip install -U pip
 pip install rasa
 rasa -h
-conda activate install_demo
 rasa init
 rasa train
+rasa shell
+```
+
+##### Running steps
+
+```bash
 rasa run --enable-api
 ```
 
