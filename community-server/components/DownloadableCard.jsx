@@ -5,7 +5,7 @@ const DownloadableCard = ({ img, title }) => {
   return (
     <div
       className="bg-white flex flex-col items-center w-[18rem]
-    justify-center border-2 border-red-500 rounded-lg px-8 py-5"
+    justify-center rounded-lg px-8 py-5"
     >
       <Barcode
         width={2}
@@ -24,7 +24,7 @@ const DownloadableCard = ({ img, title }) => {
           backgroundRepeat: "no-repeat",
         }}
         alt=""
-        className="h-52 w-52 rounded-lg border-2 border-red-500"
+        className="h-52 w-52 rounded-lg border-2 border-black"
       />
       {/* <QRCodeSVG value={title} /> */}
     </div>
