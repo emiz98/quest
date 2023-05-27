@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quest/palette.dart';
 import 'package:flutter_quest/screens/Start.dart';
-import 'package:flutter_quest/widgets/Activity.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +32,7 @@ class _MyAppState extends State<MyApp> {
           primaryColor: primary,
           errorColor: white,
           visualDensity: VisualDensity.standard),
-      home: const Activity(),
+      home: Start(),
     );
   }
 }

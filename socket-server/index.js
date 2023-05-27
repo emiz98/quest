@@ -46,7 +46,11 @@ app.post("/send", (req, res) => {
 const PORT = process.env.PORT || 8080;
 const IP_GATEWAY = process.env.IP_GATEWAY || "localhost";
 
-server.listen(PORT, IP_GATEWAY, () => {
+server.listen("8000", "192.168.8.197", () => {
   console.log(`Listening on PORT ${PORT}`.yellow);
   console.log(`IP Gateway (http://${IP_GATEWAY}:${PORT})`.red);
 });
+// server.listen(PORT, IP_GATEWAY, () => {
+//   console.log(`Listening on PORT ${PORT}`.yellow);
+//   console.log(`IP Gateway (http://${IP_GATEWAY}:${PORT})`.red);
+// });

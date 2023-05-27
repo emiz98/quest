@@ -4,8 +4,8 @@ import requests
 import speech_recognition as sr
 from pocketsphinx import LiveSpeech
 
-socketUrl = "http://192.168.1.32:8000/send"
-nodemcuUrl = "http://192.168.1.41"
+socketUrl = "http://192.168.8.197:8000/send"
+nodemcuUrl = "http://192.168.8.138"
 
 
 def contains_number(string):

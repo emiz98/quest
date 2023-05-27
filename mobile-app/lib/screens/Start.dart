@@ -26,9 +26,9 @@ class _StartState extends State<Start> {
   void initState() {
     super.initState();
     _playAnimation();
-    ipController.text = "192.168.1.32";
+    ipController.text = "192.168.8.127";
     portController.text = "8000";
-    nodeController.text = "192.168.1.41";
+    nodeController.text = "192.168.8.138";
   }
 
   @override

@@ -33,11 +33,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late Timer sleepTimer;
   int elapsedTime = 0;
 
+  List activities = [];
+
   @override
   void initState() {
     super.initState();
     startTimer();
     socketInit();
+    fetchActivities();
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 800),
@@ -63,10 +66,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _controller.dispose();
   }
 
+  fetchActivities() async {
+    var res = await apiService.getActivities();
+    setState(() {
+      activities = res['data'];
+    });
+  }
+
   void startTimer() {
     sleepTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        if (elapsedTime > 120) {
+        if (elapsedTime > 1200) {
           elapsedTime = 0;
           animation = "sleep";
         } else {
@@ -204,7 +214,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           //     ),
           //   ),
           // ),
-          if (animation == "activity") const Activity(),
+          // if (animation == "activity") Activity(activities: activities),
           if (animation == "idle")
             GestureDetector(
               onTap: () => triggerCuddleAnim(),
@@ -241,30 +251,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               cuddle,
             )),
           if (animation == "giveup")
-            Center(
-                child: Stack(
-              children: [
-                Positioned(
-                  top: 100,
-                  left: 160,
-                  child: ScaleTransition(
-                      scale:
-                          _animation.drive(CurveTween(curve: Curves.easeInOut)),
-                      child: Row(children: [
-                        SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image.memory(image),
-                        ),
-                        const SizedBox(
-                          width: 130,
-                        ),
-                        SizedBox(
-                            height: 200, width: 200, child: Image.memory(image))
-                      ])),
-                ),
-              ],
-            )),
+            ScaleTransition(
+                scale: _animation.drive(CurveTween(curve: Curves.easeInOut)),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 90),
+                  child: Row(children: [
+                    SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: Image.memory(image),
+                    ),
+                    const SizedBox(
+                      width: 130,
+                    ),
+                    SizedBox(
+                        height: 200, width: 200, child: Image.memory(image))
+                  ]),
+                )),
           // Align(alignment: Alignment.topLeft, child: SpeakBtn()),
         ],
       ),
