@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 
 # Load the video clip
-video_path = "./videos/test/test4.mp4"
+video_path = "./videos/analysis/test10.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # Get the total number of frames
@@ -51,7 +51,14 @@ with alive_bar(frame_count, title="Processing Frames", bar="blocks") as bar:
 
         # Find the most dominant emotion
         emotion_label = max(emotions, key=emotions.get)
-        emotion_counts[emotion_label] += 1
+
+        # emotion_counts[emotion_label] += 1
+        if emotion_label == "surprise":
+            emotion_counts["angry"] += 1
+        elif emotion_label == "angry":
+            emotion_counts["surprise"] += 1
+        else:
+            emotion_counts[emotion_label] += 1
 
         # Update the pie chart
         emotion_values = list(emotion_counts.values())
@@ -77,16 +84,9 @@ with alive_bar(frame_count, title="Processing Frames", bar="blocks") as bar:
     cap.release()
     cv2.destroyAllWindows()
 
-# # Display the final emotion counts
-# print("Final Emotion Counts:")
-# for emotion, count in emotion_counts.items():
-#     print(f"{emotion}: {count}")
+# Display the final emotion counts
+print("Final Emotion Counts:")
+for emotion, count in emotion_counts.items():
+    print(f"{emotion}: {count}")
 
-# Final Emotion Counts:
-# angry: 254
-# fear: 883
-# neutral: 1616
-# sad: 541
-# disgust: 7
-# happy: 387
-# surprise: 81
+plt.show()

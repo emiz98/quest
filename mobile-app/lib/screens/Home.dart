@@ -76,7 +76,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void startTimer() {
     sleepTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        if (elapsedTime > 1200) {
+        if (elapsedTime > 300) {
           elapsedTime = 0;
           animation = "sleep";
         } else {
@@ -238,6 +238,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child: Center(
                   child: Lottie.asset(
                 sleep,
+              )),
+            ),
+          if (animation == "mask")
+            GestureDetector(
+              onTap: () => triggerCuddleAnim(),
+              child: Center(
+                  child: Lottie.asset(
+                mask,
               )),
             ),
           if (animation == "wrong")

@@ -1,6 +1,7 @@
 const starter = 'assets/lotties/starter.json';
 
 const idle = 'assets/lotties/final/idle.json';
+const mask = 'assets/lotties/final/mask.json';
 const sleep = 'assets/lotties/final/sleep.json';
 const happy = 'assets/lotties/final/love.json';
 const cuddle = 'assets/lotties/final/cuddle.json';
